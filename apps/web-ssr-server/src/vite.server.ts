@@ -3,9 +3,6 @@ import { Request } from 'express'
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
 
-// 引入 Omix 类型
-type Omix<T = Record<string, any>> = T & Record<string, any>
-
 let viteServer: ViteDevServer
 export async function createViteServer() {
     if (viteServer) {
@@ -20,7 +17,7 @@ export async function createViteServer() {
     }))
 }
 
-export interface EntryOptions extends Omix {
+export interface EntryOptions {
     /**渲染内容**/
     content: string
     /**预加载配置**/
@@ -51,9 +48,9 @@ export async function fetchContentRender(html: string, opts: EntryOptions) {
 }
 
 const isProd = process.env.NODE_ENV === 'production'
-const template = isProd ? readFileSync(resolve(__dirname, '../build/client/index.html'), 'utf-8') : ''
-const manifest = isProd ? require(resolve(__dirname, '../build/client/ssr-manifest.json')) : {}
-const prodRender = isProd ? require(resolve(__dirname, '../build/server/entry-server.js')).render : () => ({})
+const template = isProd ? readFileSync(resolve(process.cwd(), 'build/client/index.html'), 'utf-8') : ''
+const manifest = isProd ? require(resolve(process.cwd(), 'build/client/ssr-manifest.json')) : {}
+const prodRender = isProd ? require(resolve(process.cwd(), 'build/server/entry-server.js')).render : () => ({})
 
 /**Web路由渲染**/
 export async function createWebServer(request: Request) {
@@ -62,16 +59,12 @@ export async function createWebServer(request: Request) {
             return await fetchContentRender(template, options)
         })
     } else {
-        try {
-            const vite = await createViteServer()
-            const html = readFileSync(resolve(process.cwd(), 'web/index.html'), 'utf-8')
-            const template = await vite.transformIndexHtml(request.originalUrl, html)
-            return await vite.ssrLoadModule('/entry-server.ts').then(async ({ render }) => {
-                const options = await render(request, {})
-                return await fetchContentRender(template, options)
-            })
-        } catch (error) {
-            console.log(`createWebServer:`, error)
-        }
+        const vite = await createViteServer()
+        const html = readFileSync(resolve(process.cwd(), 'web/index.html'), 'utf-8')
+        const element = await vite.transformIndexHtml(request.originalUrl, html)
+        return await vite.ssrLoadModule('/entry-server.ts').then(async ({ render }) => {
+            const options = await render(request, {})
+            return await fetchContentRender(element, options)
+        })
     }
 }

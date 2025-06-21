@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
+import { AppController } from '@web-ssr-server/app.controller'
 // import { ConfigModule } from '@server/modules/config/config.module'
 // import { LoggerModule } from '@server/modules/logger/logger.module'
 

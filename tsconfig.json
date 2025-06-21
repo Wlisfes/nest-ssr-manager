@@ -21,7 +21,8 @@
         "jsxImportSource": "vue",
         "esModuleInterop": true,
         "typeRoots": ["./node_modules/@types"],
-        "outDir": "dist",
+        "outDir": "./dist",
+        "baseUrl": "./",
         "paths": {
             "@/*": ["./web/*"],
             "@server/*": ["./server/*"],
