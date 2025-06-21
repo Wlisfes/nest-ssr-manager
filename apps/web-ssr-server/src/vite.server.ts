@@ -17,7 +17,7 @@ export async function createViteServer() {
     }))
 }
 
-export interface EntryOptions {
+export interface EntryOptions extends Omix {
     /**渲染内容**/
     content: string
     /**预加载配置**/
@@ -47,24 +47,36 @@ export async function fetchContentRender(html: string, opts: EntryOptions) {
         .replace(`<!--app-ssr-style-->`, opts.css ?? '' + opts.links ?? '')
 }
 
-const isProd = process.env.NODE_ENV === 'production'
-const template = isProd ? readFileSync(resolve(process.cwd(), 'build/client/index.html'), 'utf-8') : ''
-const manifest = isProd ? require(resolve(process.cwd(), 'build/client/ssr-manifest.json')) : {}
-const prodRender = isProd ? require(resolve(process.cwd(), 'build/server/entry-server.js')).render : () => ({})
+/**生产环境配置**/
+export class WebClient {
+    private static instance: WebClient
+    public template: string = ''
+    public manifest: Record<string, any> = {}
+    public render: Function = () => ({})
+    constructor() {
+        if (!WebClient.instance) {
+            this.template = readFileSync(resolve(process.cwd(), 'build/client/index.html'), 'utf-8')
+            this.manifest = require('../../../build/client/ssr-manifest.json')
+            this.render = require('../../../build/server/entry-server.js').render
+            WebClient.instance = this
+        }
+        return WebClient.instance
+    }
+}
 
 /**Web路由渲染**/
 export async function createRouteServer(request: Request) {
     if (process.env.NODE_ENV === 'production') {
-        return await prodRender(request, manifest).then(async options => {
-            return await fetchContentRender(template, options)
-        })
+        const client = new WebClient()
+        const options = await client.render(request, client.manifest)
+        return await fetchContentRender(client.template, options)
     } else {
         const vite = await createViteServer()
         const html = readFileSync(resolve(process.cwd(), 'web/index.html'), 'utf-8')
-        const template = await vite.transformIndexHtml(request.originalUrl, html)
+        const element = await vite.transformIndexHtml(request.originalUrl, html)
         return await vite.ssrLoadModule('./entry-server.ts').then(async ({ render }) => {
             const options = await render(request, {})
-            return await fetchContentRender(template, options)
+            return await fetchContentRender(element, options)
         })
     }
 }
