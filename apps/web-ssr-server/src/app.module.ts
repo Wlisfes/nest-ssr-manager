@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common'
-import { AppController } from '@web-ssr-server/app.controller'
-// import { ConfigModule } from '@server/modules/config/config.module'
-// import { LoggerModule } from '@server/modules/logger/logger.module'
+import { WebModule } from '@server/modules/web/web.module'
 
 @Module({
-    // imports: [ConfigModule],
-    controllers: [AppController]
+    imports: [WebModule]
 })
 export class AppModule {}

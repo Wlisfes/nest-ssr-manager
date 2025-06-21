@@ -17,7 +17,7 @@ export async function createViteServer() {
     }))
 }
 
-export interface EntryOptions extends Omix {
+export interface EntryOptions {
     /**渲染内容**/
     content: string
     /**预加载配置**/

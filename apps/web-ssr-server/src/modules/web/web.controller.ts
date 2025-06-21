@@ -1,15 +1,14 @@
 import { Controller, Get, Header, Request } from '@nestjs/common'
-import { createWebServer } from '@web-ssr-server/vite.server'
+import { createRouteServer } from '@server/vite.server'
 
 @Controller()
-export class AppController {
+export class WebController {
     @Get('*')
     @Header('Content-Type', 'text/html')
     async fetchBaseRender(@Request() request) {
         try {
-            return await createWebServer(request)
+            return await createRouteServer(request)
         } catch (error) {
-            console.log(error)
             return '500'
         }
     }

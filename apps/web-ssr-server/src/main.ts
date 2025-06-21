@@ -1,7 +1,7 @@
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app.module'
-import { createViteServer } from './vite.server'
+import { AppModule } from '@server/app.module'
+import { createViteServer } from '@server/vite.server'
 import { resolve } from 'path'
 import compression from 'compression'
 
@@ -16,7 +16,7 @@ async function bootstrap() {
         const vite = await createViteServer()
         await app.use(vite.middlewares)
     }
-    return await app.listen(4080).then(() => {
+    app.listen(4080).then(() => {
         console.log(`Nest服务启动[${process.env.NODE_ENV}]:`, `http://localhost:4080`)
     })
 }
