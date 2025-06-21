@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { WebController } from '@server/modules/web/web.controller'
+import { WebController } from './web.controller'
 
 @Module({
     controllers: [WebController]

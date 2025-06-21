@@ -48,9 +48,9 @@ export async function fetchContentRender(html: string, opts: EntryOptions) {
 }
 
 const isProd = process.env.NODE_ENV === 'production'
-const template = isProd ? readFileSync(resolve(__dirname, '../build/client/index.html'), 'utf-8') : ''
-const manifest = isProd ? require(resolve(__dirname, '../build/client/ssr-manifest.json')) : {}
-const prodRender = isProd ? require(resolve(__dirname, '../build/server/entry-server.js')).render : () => ({})
+const template = isProd ? readFileSync(resolve(process.cwd(), 'build/client/index.html'), 'utf-8') : ''
+const manifest = isProd ? require(resolve(process.cwd(), 'build/client/ssr-manifest.json')) : {}
+const prodRender = isProd ? require(resolve(process.cwd(), 'build/server/entry-server.js')).render : () => ({})
 
 /**Web路由渲染**/
 export async function createRouteServer(request: Request) {
@@ -60,7 +60,7 @@ export async function createRouteServer(request: Request) {
         })
     } else {
         const vite = await createViteServer()
-        const html = readFileSync(resolve(__dirname, '../../../web/index.html'), 'utf-8')
+        const html = readFileSync(resolve(process.cwd(), 'web/index.html'), 'utf-8')
         const template = await vite.transformIndexHtml(request.originalUrl, html)
         return await vite.ssrLoadModule('./entry-server.ts').then(async ({ render }) => {
             const options = await render(request, {})

@@ -1,7 +1,7 @@
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from '@server/app.module'
-import { createViteServer } from '@server/vite.server'
+import { AppModule } from './app.module'
+import { createViteServer } from './vite.server'
 import { resolve } from 'path'
 import compression from 'compression'
 
@@ -10,7 +10,7 @@ async function bootstrap() {
         cors: true
     })
     if (process.env.NODE_ENV === 'production') {
-        app.useStaticAssets(resolve(__dirname, '../build/client'), { index: false })
+        app.useStaticAssets(resolve(process.cwd(), 'build/client'), { index: false })
         app.use(compression())
     } else {
         const vite = await createViteServer()

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { WebModule } from '@server/modules/web/web.module'
+import { WebModule } from './modules/web/web.module'
 
 @Module({
     imports: [WebModule]
