@@ -10,6 +10,7 @@
         "dev:web-ssr-server": "cross-env NODE_ENV=development nest start --watch web-ssr-server",
         "start:web-ssr-server": "cross-env NODE_ENV=production node dist/apps/web-ssr-server/main.js",
         "build:web-ssr-server": "nest build web-ssr-server",
+        "dev": "cross-env NODE_ENV=development nest start --watch",
         "build": "nest build",
         "build:web": "npm run build:web:client && npm run build:web:server",
         "build:web:client": "vite --config web/vite.config.ts build --ssrManifest --outDir ../build/client",
