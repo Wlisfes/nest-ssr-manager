@@ -4,6 +4,7 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
 import Analyzer from 'rollup-plugin-analyzer'
+import Devtools from 'vite-plugin-devtools-json'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Vue from '@vitejs/plugin-vue'
 import SvgLoader from 'vite-svg-loader'
@@ -40,6 +41,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
             SvgLoader({ defaultImport: 'component' }),
             UnoCSS({ mode: 'global' }),
             Analyzer({ summaryOnly: true }),
+            Devtools({ uuid: 'fadeb2fe-e16a-420a-a328-41a9c45a1ad3' }),
             Components({
                 deep: true,
                 extensions: ['vue'],

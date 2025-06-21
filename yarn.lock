@@ -5419,6 +5419,13 @@ vite-plugin-compression@^0.5.1:
     debug "^4.3.3"
     fs-extra "^10.0.0"
 
+vite-plugin-devtools-json@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmmirror.com/vite-plugin-devtools-json/-/vite-plugin-devtools-json-0.2.0.tgz#b941ac1bbaff8aa5b328e06837e3bd90822dd99d"
+  integrity sha512-K7PoaWOEJECZ1n3VbhJXsUAX2PsO0xY7KFMM/Leh7tUev0M5zi+lz+vnVVdCK17IOK9Jp9rdzHXc08cnQirGbg==
+  dependencies:
+    uuid "^11.1.0"
+
 vite-svg-loader@^5.1.0:
   version "5.1.0"
   resolved "https://registry.npmmirror.com/vite-svg-loader/-/vite-svg-loader-5.1.0.tgz#b0b89bd8024bc0f707d0e8d7422446ac01576d94"
