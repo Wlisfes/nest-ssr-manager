@@ -62,15 +62,16 @@ export async function createWebServer(request: Request) {
             return await fetchContentRender(template, options)
         })
     } else {
-        const vite = await createViteServer()
-        const html = readFileSync(resolve(__dirname, '../../../web/index.html'), 'utf-8')
-        const template = await vite.transformIndexHtml(request.originalUrl, html)
-
-        return await vite.ssrLoadModule('/entry-server.ts').then(async ({ render }) => {
-            // const options = await render(request, {})
-            // return await fetchContentRender(template, options)
-
-            return `<h1>Holle</h1>`
-        })
+        try {
+            const vite = await createViteServer()
+            const html = readFileSync(resolve(process.cwd(), 'web/index.html'), 'utf-8')
+            const template = await vite.transformIndexHtml(request.originalUrl, html)
+            return await vite.ssrLoadModule('/entry-server.ts').then(async ({ render }) => {
+                const options = await render(request, {})
+                return await fetchContentRender(template, options)
+            })
+        } catch (error) {
+            console.log(`createWebServer:`, error)
+        }
     }
 }
