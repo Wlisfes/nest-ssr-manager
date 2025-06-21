@@ -1,5 +1,5 @@
 import { Controller, Get, Header, Request } from '@nestjs/common'
-import { createWebServer } from './vite.server'
+import { createWebServer } from '@server/vite.server'
 
 @Controller()
 export class AppController {

@@ -24,7 +24,7 @@
         "outDir": "dist",
         "paths": {
             "@/*": ["./web/*"],
-            "@src/*": ["./server/*"],
+            "@server/*": ["./server/*"],
             "@web-ssr-server/*": ["./apps/web-ssr-server/src/*"]
         }
     },

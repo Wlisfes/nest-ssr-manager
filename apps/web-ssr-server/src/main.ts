@@ -16,8 +16,8 @@ async function bootstrap() {
         const vite = await createViteServer()
         await app.use(vite.middlewares)
     }
-    return await app.listen(5480).then(() => {
-        console.log(`Nest服务启动[${process.env.NODE_ENV}]:`, `http://localhost:5480`)
+    return await app.listen(4080).then(() => {
+        console.log(`Nest服务启动[${process.env.NODE_ENV}]:`, `http://localhost:4080`)
     })
 }
 bootstrap()
