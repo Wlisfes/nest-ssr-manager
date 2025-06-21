@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
-import { WebModule } from './modules/web/web.module'
+import { AppController } from '@web-ssr-server/app.controller'
 
 @Module({
-    imports: [WebModule]
+    controllers: [AppController]
 })
 export class AppModule {}
