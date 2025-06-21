@@ -22,7 +22,7 @@ declare interface EnvOptions {
     /**环境标识**/
     NODE_ENV: 'development' | 'production'
     /**服务端口号**/
-    NODE_PORT: number
+    NODE_CLIENT_PORT: number
     /**接口API地址**/
     NODE_API_BASEURL: string
     /**网站标题**/
