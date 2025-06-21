@@ -1,0 +1,28 @@
+{
+    "$schema": "https://json.schemastore.org/nest-cli",
+    "collection": "@nestjs/schematics",
+    "sourceRoot": "apps/web-ssr-server/src",
+    "generateOptions": {
+        "flat": false,
+        "spec": false
+    },
+    "compilerOptions": {
+        "deleteOutDir": true,
+        "webpack": true,
+        "tsConfigPath": "apps/web-ssr-server/tsconfig.app.json",
+        "assets": [{ "include": "../env/*", "outDir": "./dist/env" }]
+    },
+    "monorepo": true,
+    "root": "apps/web-ssr-server",
+    "projects": {
+        "web-ssr-server": {
+            "type": "application",
+            "root": "apps/web-ssr-server",
+            "entryFile": "main",
+            "sourceRoot": "apps/web-ssr-server/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/web-ssr-server/tsconfig.app.json"
+            }
+        }
+    }
+}
