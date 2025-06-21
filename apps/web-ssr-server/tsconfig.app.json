@@ -4,6 +4,6 @@
         "declaration": false,
         "outDir": "../../dist/apps/web-ssr-server"
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "../../env.d.ts"],
     "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
 }
