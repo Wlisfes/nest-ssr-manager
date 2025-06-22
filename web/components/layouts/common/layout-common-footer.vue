@@ -36,12 +36,12 @@ export default defineComponent({
 
         return () => (
             <n-element class="layout-common-footer flex flex-col overflow-hidden">
-                <div class="chat-connect common-width-inline flex justify-between gap-16 overflow-hidden p-bs-48 p-be-24">
+                <div class="chat-connect common-width-inline flex justify-between gap-16 p-block-24">
                     <div class="flex flex-col gap-5 overflow-hidden">
                         <h1 class="m-0 text-22">订阅 ChatBook SMS 新闻</h1>
-                        <n-text>加入 20000 多人使用的 ChatBook SMS 行列</n-text>
+                        <n-text depth={3}>加入 20000 多人使用的 ChatBook SMS 行列</n-text>
                     </div>
-                    <div class="chat-connect-input flex gap-16 items-center overflow-hidden">
+                    <div class="chat-connect-input flex gap-16 items-center">
                         <n-input class="flex-1" size="large" placeholder="请输入您的邮箱" />
                         <n-button class="w-[var(--chat-connect-mail-width)]" size="large" type="primary">
                             订阅
