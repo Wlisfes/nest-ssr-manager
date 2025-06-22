@@ -68,15 +68,17 @@ export default defineComponent({
                 </div>
                 <div class="chat-block grid gap-20 p-bs-24 p-be-48">
                     {state.columns.map((item, index) => (
-                        <n-card key={index} hoverable content-class="p-20!" class="b-rd-8" data-aos="fade-up">
-                            <n-button secondary circle focusable={false} type={item.type} class="w-64 h-64">
-                                <common-wrapper name={item.icon} size={32}></common-wrapper>
-                            </n-button>
-                            <div class="flex flex-col gap-5 m-bs-10">
-                                <h1 class="m-0 text-18">{item.title}</h1>
-                                <n-text depth={3}>{item.document}</n-text>
-                            </div>
-                        </n-card>
+                        <div key={index} class="chat-block-column" data-aos="fade-up">
+                            <n-card hoverable content-class="p-20!" class="b-rd-8 h-full">
+                                <n-button secondary circle focusable={false} type={item.type} class="w-64 h-64">
+                                    <common-wrapper name={item.icon} size={32}></common-wrapper>
+                                </n-button>
+                                <div class="flex flex-col gap-5 m-bs-10">
+                                    <h1 class="m-0 text-18">{item.title}</h1>
+                                    <n-text depth={3}>{item.document}</n-text>
+                                </div>
+                            </n-card>
+                        </div>
                     ))}
                 </div>
             </n-element>
