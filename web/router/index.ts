@@ -1,7 +1,5 @@
 import { createRouter as _createRouter, createMemoryHistory, createWebHistory } from 'vue-router'
-import Layout from '@/components/layouts/layout.vue'
-import BaseHome from '@/views/home/home.vue'
-import Base404 from '@/views/error/404.vue'
+import Client from '@/components/layouts/layout-client.vue'
 
 export function createRouter(options: Omix<{ ssr: boolean }>) {
     return _createRouter({
@@ -9,22 +7,21 @@ export function createRouter(options: Omix<{ ssr: boolean }>) {
         routes: [
             {
                 path: '/',
-                name: 'HomeLayout',
-                props: { name: 'HomeLayout' },
-                component: Layout,
+                name: Client.name,
+                component: Client,
                 children: [
-                    { path: '/', name: BaseHome.name, meta: { AUTH: 'NONE' }, component: BaseHome },
-                    { path: '/:pathMatch(.*)*', name: Base404.name, meta: { AUTH: 'NONE' }, component: Base404 }
+                    {
+                        path: '/',
+                        meta: { AUTH: 'NONE' },
+                        component: () => import('@/views/home/home.vue')
+                    },
+                    {
+                        path: '/:pathMatch(.*)*',
+                        meta: { AUTH: 'NONE' },
+                        component: () => import('@/views/error/404.vue')
+                    }
                 ]
             }
-            // {
-            //     path: '/',
-            //     name: 'GlobalLayout',
-            //     props: { name: 'GlobalLayout' },
-            //     component: Layout,
-            //     children: [
-            //     ]
-            // }
         ]
     })
 }

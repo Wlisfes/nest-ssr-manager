@@ -17,11 +17,7 @@ export default defineComponent({
     //     }
     // },
     setup(props) {
-        return () => (
-            <n-element class="flex flex-col flex-1 overflow-hidden">
-                <n-card data-aos="fade-up">没有标题</n-card>
-            </n-element>
-        )
+        return () => <n-element class="flex flex-col flex-1 overflow-hidden"></n-element>
     }
 })
 </script>
