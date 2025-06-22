@@ -9,7 +9,7 @@ export default defineComponent({
                 <n-divider class="m-0!"></n-divider>
                 <n-element class="common-width-inline flex flex-wrap items-center justify-between p-block-16 gap-y-5">
                     <n-ellipsis tooltip={false}>
-                        <n-text>{`Copyright © 2021-${new Date().getFullYear()} ChatBoost - `}</n-text>
+                        <n-text>{`Copyright © 2021-${new Date().getFullYear()} ChatBook - `}</n-text>
                         <n-button text focusable={false}>
                             MIT License
                         </n-button>
