@@ -12,10 +12,11 @@ export default defineComponent({
         return () => (
             <n-layout class="h-full overflow-hidden" content-class="flex flex-col overflow-hidden">
                 <n-layout-header class="w-full overflow-hidden">
-                    <n-element class="common-width-inline h-48 flex gap-20 overflow-hidden">
+                    <n-element class="common-width-inline h-60 flex gap-20 overflow-hidden">
                         <router-link to="/" class="flex overflow-hidden">
                             <n-button text focusable={false}>
-                                <common-wrapper name="nest-logo" size={42}></common-wrapper>
+                                <common-wrapper name="nest-logo" color="var(--n-text-color-hover)" size={40}></common-wrapper>
+                                <h2 class="m-0 p-bs-8 p-inline-5">ChatBoost</h2>
                             </n-button>
                         </router-link>
                         <n-element class="h-full flex-1"></n-element>
