@@ -106,10 +106,7 @@ export default defineComponent({
                 <n-divider class="m-0!"></n-divider>
                 <n-element class="common-width-inline flex flex-wrap gap-16 text-12 items-center justify-between p-block-16 gap-y-5">
                     <n-ellipsis tooltip={false}>
-                        <n-text>{`Copyright © 2021-${new Date().getFullYear()} ChatBook - `}</n-text>
-                        <n-button text focusable={false} class="text-12">
-                            MIT License
-                        </n-button>
+                        <n-text>{`Copyright © 2021-${new Date().getFullYear()} ChatBook. All rights reserved.`}</n-text>
                     </n-ellipsis>
                     <n-a class="whitespace-nowrap decoration-none text-center" target="_blank" href="https://beian.miit.gov.cn">
                         <n-button text focusable={false} class="text-12">
