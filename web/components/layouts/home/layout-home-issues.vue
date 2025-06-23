@@ -68,10 +68,10 @@ export default defineComponent({
                         </n-button>
                     </div>
                 </div>
-                <div class="chat-block grid gap-20 p-bs-24">
+                <div class="chat-block grid gap-24 p-bs-24">
                     {state.columns.map((item, index) => (
                         <div key={index} class="chat-block-column" data-aos="fade-up" data-aos-delay={index * 100}>
-                            <n-card hoverable content-class="p-20!" class="b-rd-8 h-full">
+                            <n-card hoverable content-class="p-24!" class="b-rd-8 h-full">
                                 <n-button secondary circle focusable={false} type={item.type} class="w-64 h-64">
                                     <common-wrapper name={item.icon} size={32}></common-wrapper>
                                 </n-button>

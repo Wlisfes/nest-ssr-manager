@@ -46,10 +46,10 @@ export default defineComponent({
                         {state.document}
                     </n-text>
                 </div>
-                <div class="chat-choose grid gap-20 p-bs-48">
+                <div class="chat-choose grid gap-24 p-bs-48">
                     {state.columns.map((item, index) => (
                         <div key={index} class="chat-choose-column" data-aos="fade-up" data-aos-delay={index * 100}>
-                            <n-card hoverable content-class="p-20!" class="b-rd-8 h-full">
+                            <n-card hoverable content-class="p-24!" class="b-rd-8 h-full">
                                 <n-button secondary circle focusable={false} type={item.type} class="w-64 h-64">
                                     <common-wrapper name={item.icon} size={32}></common-wrapper>
                                 </n-button>
