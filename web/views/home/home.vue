@@ -19,6 +19,7 @@ export default defineComponent({
     setup(props) {
         return () => (
             <n-element class="flex flex-col flex-1 overflow-hidden">
+                <layout-home-choose></layout-home-choose>
                 <layout-home-issues></layout-home-issues>
             </n-element>
         )
