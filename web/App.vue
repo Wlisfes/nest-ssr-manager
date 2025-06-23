@@ -10,7 +10,7 @@ export default defineComponent({
     setup(props) {
         const { themeStyle, themeOverrides } = useStore(useMouse)
         const { Locale } = useI18nContext()
-        onMounted(() => AOS.init())
+        onMounted(() => AOS.init({ disable: window.innerWidth < 1080 }))
 
         return () => (
             <n-config-provider
