@@ -10,7 +10,21 @@ export default defineComponent({
     setup(props) {
         const { themeStyle, themeOverrides } = useStore(useMouse)
         const { Locale } = useI18nContext()
-        onMounted(() => AOS.init({ disable: window.innerWidth < 1080 }))
+
+        onMounted(() => {
+            AOS.init({ disable: window.innerWidth < 1080 })
+            const observer = new IntersectionObserver(
+                entries => {
+                    entries.forEach(entry => {
+                        entry.isIntersecting && entry.target.classList.add('aos-animate')
+                    })
+                },
+                { root: null, rootMargin: '0px', threshold: 0.01 }
+            )
+            document.querySelectorAll('[data-aos]').forEach(el => {
+                observer.observe(el)
+            })
+        })
 
         return () => (
             <n-config-provider
