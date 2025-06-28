@@ -1,10 +1,13 @@
 <script lang="tsx">
-import { defineComponent, Fragment } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { useGlobal, useMouse, useStore } from '@/store'
+import { useAosObserver } from '@/hooks/hook-aos-observer'
 
 export default defineComponent({
     name: 'LayoutClient',
     setup(props) {
+        const { fetchScrollbar } = useAosObserver()
+
         return () => (
             <n-layout class="h-full overflow-hidden" content-class="flex flex-col overflow-hidden">
                 <n-layout-header class="w-full overflow-hidden">
@@ -28,6 +31,7 @@ export default defineComponent({
                     content-class="min-h-full flex flex-col"
                     native-scrollbar={false}
                     scrollbar-props={{ size: 100, trigger: 'none' }}
+                    on-scroll={fetchScrollbar}
                 >
                     <n-element class="flex flex-col flex-1">
                         <router-view>{{ default: ({ Component, route }) => <Component key={route.fullPath} /> }}</router-view>

@@ -1,30 +1,14 @@
 <script lang="tsx">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { RouterView } from 'vue-router'
 import { useMouse, useStore } from '@/store'
 import { useI18nContext } from '@/i18n'
-import AOS from 'aos'
 
 export default defineComponent({
     name: 'App',
     setup(props) {
         const { themeStyle, themeOverrides } = useStore(useMouse)
         const { Locale } = useI18nContext()
-
-        onMounted(() => {
-            AOS.init({ disable: window.innerWidth < 1080 })
-            const observer = new IntersectionObserver(
-                entries => {
-                    entries.forEach(entry => {
-                        entry.isIntersecting && entry.target.classList.add('aos-animate')
-                    })
-                },
-                { root: null, rootMargin: '0px', threshold: 0.01 }
-            )
-            document.querySelectorAll('[data-aos]').forEach(el => {
-                observer.observe(el)
-            })
-        })
 
         return () => (
             <n-config-provider

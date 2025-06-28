@@ -26,7 +26,7 @@
         "@nestjs/typeorm": "^10.0.2",
         "@vueuse/components": "^13.4.0",
         "@vueuse/core": "^13.4.0",
-        "aos": "^2.3.4",
+        "aos-observer": "^1.1.0",
         "axios": "^1.9.0",
         "bcryptjs": "^2.4.3",
         "class-transformer": "^0.5.1",
