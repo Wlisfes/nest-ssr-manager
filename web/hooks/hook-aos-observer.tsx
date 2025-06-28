@@ -9,6 +9,7 @@ export function useAosObserver() {
         return await nextTick(() => {
             return (element.value = AOS.init({
                 scroll: false,
+                once: true,
                 disable: window.innerWidth < 1080
             }))
         })
