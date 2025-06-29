@@ -21,6 +21,7 @@ export function themeOverrides(inverted: boolean, state: Omix): Omix<GlobalTheme
     if (inverted) {
         return {
             common: {
+                fontWeightStrong: '600',
                 primaryColor: state.primaryColor,
                 primaryColorHover: lightenStr,
                 primaryColorPressed: lightenStr,
@@ -33,6 +34,7 @@ export function themeOverrides(inverted: boolean, state: Omix): Omix<GlobalTheme
     }
     return {
         common: {
+            fontWeightStrong: '600',
             primaryColor: state.primaryColor,
             primaryColorHover: lightenStr,
             primaryColorPressed: lightenStr,

@@ -21,6 +21,7 @@ export default defineComponent({
             <n-element class="flex flex-col flex-1 overflow-hidden">
                 <layout-home-choose></layout-home-choose>
                 <layout-home-issues></layout-home-issues>
+                <layout-home-facts></layout-home-facts>
             </n-element>
         )
     }
