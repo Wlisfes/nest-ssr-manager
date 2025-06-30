@@ -60,10 +60,10 @@ export default defineComponent({
                         </n-text>
                     </div>
                     <div class="flex items-end justify-center gap-16">
-                        <n-button size="large" type="primary">
+                        <n-button size="large" type="primary" data-aos="fade-left">
                             前往支持中心
                         </n-button>
-                        <n-button size="large" type="primary" ghost>
+                        <n-button size="large" type="primary" ghost data-aos="fade-left">
                             联系我们
                         </n-button>
                     </div>

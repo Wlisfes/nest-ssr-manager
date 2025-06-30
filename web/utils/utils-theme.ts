@@ -2,6 +2,8 @@ import { GlobalThemeOverrides, ThemeCommonVars } from 'naive-ui'
 
 export interface CustomThemeCommonVars extends Omix<ThemeCommonVars> {
     '--layout-common-footer-background-color': string
+    '--layout-common-super-text-color': string
+    '--layout-common-super-background-color': string
 }
 
 export function addLight(color: string, amount: number) {
@@ -26,6 +28,8 @@ export function themeOverrides(inverted: boolean, state: Omix): Omix<GlobalTheme
                 primaryColorHover: lightenStr,
                 primaryColorPressed: lightenStr,
                 primaryColorSuppl: state.primaryColor,
+                '--layout-common-super-text-color': 'var(--text-color-2)',
+                '--layout-common-super-background-color': '#000000',
                 '--layout-common-footer-background-color': '#000000'
             },
             Scrollbar: { width: '6px', height: '6px' },
@@ -39,6 +43,8 @@ export function themeOverrides(inverted: boolean, state: Omix): Omix<GlobalTheme
             primaryColorHover: lightenStr,
             primaryColorPressed: lightenStr,
             primaryColorSuppl: state.primaryColor,
+            '--layout-common-super-text-color': '#ffffff',
+            '--layout-common-super-background-color': '#222833',
             '--layout-common-footer-background-color': '#f8f8f8'
         },
         Scrollbar: { width: '6px', height: '6px' },
