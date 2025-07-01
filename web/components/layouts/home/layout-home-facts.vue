@@ -1,12 +1,10 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { useMouse, useStore } from '@/store'
 import { useState } from '@/hooks/hook-state'
 
 export default defineComponent({
     name: 'LayoutHomeFacts',
     setup(props) {
-        const { inverted } = useStore(useMouse)
         const { state } = useState({
             hot: 'Important Facts About SMS',
             title: `关于 SMS 的重要事实-在移动互联网时代，SMS 是接触潜在客户的最直接方式之一`,
@@ -18,6 +16,7 @@ export default defineComponent({
                 { title: '10倍+', document: '选择 SMS 营销可以获得更多利润' }
             ]
         })
+
         return () => (
             <n-element class="layout-home-facts common-width-inline">
                 <div class="facts-box flex flex-col items-center">
@@ -37,22 +36,26 @@ export default defineComponent({
                     </div>
                 </div>
                 <div data-aos="fade-up">
-                    <div class="chat-super flex flex-col items-center bg-transition">
-                        <div class="flex flex-col items-center justify-center overflow-hidden">
-                            <div class="flex items-center gap-5 p-be-10">
-                                <common-wrapper size={36} color="var(--primary-color)" name="nest-issues-chat"></common-wrapper>
-                                <span class="text-18 text-transition  text-[var(--layout-common-super-text-color)]">ChatBook</span>
+                    <n-card embedded bordered={false} class="chat-super-card overflow-hidden" content-class="p-0!">
+                        <div class="chat-super flex flex-col items-center">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="flex items-center gap-5 p-be-10">
+                                    <common-wrapper size={36} color="var(--primary-color)" name="nest-issues-chat"></common-wrapper>
+                                    <n-text class="text-18" strong>
+                                        ChatBook
+                                    </n-text>
+                                </div>
+                                <n-h1 class="m-0 text-center text-size-[var(--chat-super-title-size)]">
+                                    创新通信解决方案，
+                                    <br />
+                                    ChatBook 让 SMS 消息自由传递。
+                                </n-h1>
                             </div>
-                            <h1 class="m-0 text-transition text-center">
-                                创新通信解决方案，
-                                <br />
-                                ChatBook 让 SMS 消息自由传递。
-                            </h1>
+                            <n-button class="min-w-120" size="large" type="primary">
+                                立即使用
+                            </n-button>
                         </div>
-                        <n-button size="large" type="primary">
-                            立即使用
-                        </n-button>
-                    </div>
+                    </n-card>
                 </div>
             </n-element>
         )
@@ -107,11 +110,8 @@ export default defineComponent({
 .chat-super {
     --chat-super-title-size: 36px;
     position: relative;
-    background-color: var(--layout-common-super-background-color);
-    border-radius: 12px;
     padding: 60px;
     gap: 48px;
-    margin-block-end: 64px;
     &::before {
         position: absolute;
         left: 0;
@@ -145,20 +145,19 @@ export default defineComponent({
     @media (max-width: 760px) {
         --chat-super-title-size: 28px;
         padding: 40px;
-        &::after,
-        &::before {
-            display: none;
-        }
     }
     @media (max-width: 580px) {
         --chat-super-title-size: 22px;
-        margin-block-end: 48px;
         padding: 24px;
         gap: 32px;
     }
-    h1 {
-        color: var(--layout-common-super-text-color);
-        font-size: var(--chat-super-title-size);
+}
+
+.chat-super-card {
+    --n-border-radius: 12px;
+    margin-block-end: 80px;
+    @media (max-width: 580px) {
+        margin-block-end: 48px;
     }
 }
 </style>

@@ -1,10 +1,6 @@
 import { GlobalThemeOverrides, ThemeCommonVars } from 'naive-ui'
 
-export interface CustomThemeCommonVars extends Omix<ThemeCommonVars> {
-    '--layout-common-footer-background-color': string
-    '--layout-common-super-text-color': string
-    '--layout-common-super-background-color': string
-}
+export interface CustomThemeCommonVars extends Omix<ThemeCommonVars> {}
 
 export function addLight(color: string, amount: number) {
     const cc = parseInt(color, 16) + amount
@@ -27,10 +23,7 @@ export function themeOverrides(inverted: boolean, state: Omix): Omix<GlobalTheme
                 primaryColor: state.primaryColor,
                 primaryColorHover: lightenStr,
                 primaryColorPressed: lightenStr,
-                primaryColorSuppl: state.primaryColor,
-                '--layout-common-super-text-color': 'var(--text-color-2)',
-                '--layout-common-super-background-color': '#000000',
-                '--layout-common-footer-background-color': '#000000'
+                primaryColorSuppl: state.primaryColor
             },
             Scrollbar: { width: '6px', height: '6px' },
             Tree: { nodeHeight: '36px' }
@@ -42,10 +35,7 @@ export function themeOverrides(inverted: boolean, state: Omix): Omix<GlobalTheme
             primaryColor: state.primaryColor,
             primaryColorHover: lightenStr,
             primaryColorPressed: lightenStr,
-            primaryColorSuppl: state.primaryColor,
-            '--layout-common-super-text-color': '#ffffff',
-            '--layout-common-super-background-color': '#222833',
-            '--layout-common-footer-background-color': '#f8f8f8'
+            primaryColorSuppl: state.primaryColor
         },
         Scrollbar: { width: '6px', height: '6px' },
         Tree: { nodeHeight: '36px' }
