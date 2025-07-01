@@ -23,7 +23,7 @@ export const useMouse = defineStore('APP_NEST_MOUSE_STORE', () => {
 
     return {
         ...toRefs(state),
-        state: computed(() => state),
+        state,
         /**主题反转**/
         inverted: computed(() => state.theme === 'dark'),
         /**主题配色**/

@@ -18,11 +18,14 @@ export default defineComponent({
                                 <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
                             </n-button>
                         </router-link>
-                        <n-element class="h-full flex-1"></n-element>
+                        <n-element class="h-full flex-1 p-inline-40">sdasd</n-element>
                         <n-element class="h-full flex items-center overflow-hidden">
-                            <layout-common-consumer></layout-common-consumer>
-                            <n-divider vertical class="h-20! m-inline-20!" />
                             <layout-common-deploy></layout-common-deploy>
+                            <n-divider vertical class="h-20! m-inline-20!" />
+                            <n-button focusable={false} round type="primary">
+                                免费体验
+                            </n-button>
+                            {/* <layout-common-consumer></layout-common-consumer> */}
                         </n-element>
                     </n-element>
                 </n-layout-header>

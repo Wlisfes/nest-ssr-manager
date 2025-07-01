@@ -11,8 +11,8 @@ export const useGlobal = defineStore('APP_NEST_GLOBAL_STORE', () => {
     })
 
     return {
-        state: computed(() => state),
         ...toRefs(state),
+        state,
         setState
     }
 })

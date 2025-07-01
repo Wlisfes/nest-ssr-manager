@@ -26,8 +26,9 @@ export default defineComponent({
             <n-popover trigger="click" v-model:show={state.visible} style={{ padding: '8px' }}>
                 {{
                     trigger: () => (
-                        <div class="flex items-center justify-end select-none cursor-pointer">
+                        <div class="flex gap-5 items-center justify-end select-none cursor-pointer">
                             <common-wrapper name="nest-i18n" size={24}></common-wrapper>
+                            <span class="text-13">简体中文</span>
                         </div>
                     ),
                     default: () => (
