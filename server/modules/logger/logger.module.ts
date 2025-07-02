@@ -1,4 +1,4 @@
-import { Module, DynamicModule } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { Logger } from '@server/modules/logger/logger.service'
 import { isNotEmpty } from 'class-validator'
 import { WinstonModule } from 'nest-winston'
@@ -9,7 +9,7 @@ import util from 'util'
 import 'winston-daily-rotate-file'
 
 /**当前运行服务名称**/
-export const CurrentServerName = __dirname.split(`\\`).pop()
+export const logName = __dirname.split(`\\`).pop()
 
 /**对象数据转换**/
 export function fetchReduces(data: Omix) {
@@ -18,13 +18,13 @@ export function fetchReduces(data: Omix) {
 }
 
 /**写入数据组合**/
-export function fetchWrite(serverName: string, data: Omix, opts: Omix<{ middleware?: string; log: any }>) {
-    return `服务名称:[${serverName}] 进程ID:[${process.pid}]  ${data.timestamp}  ${data.level.toUpperCase()}  上下文ID:[${data.context ?? ''}]  执行方法:[${data.message}]  ${opts.middleware ?? ''}耗时:${data.duration}  {\n    ${opts.log}\n}`
+export function fetchWrite(data: Omix, opts: Omix<{ middleware?: string; log: any }>) {
+    return `服务名称:[${logName}] 进程ID:[${process.pid}]  ${data.timestamp}  ${data.level.toUpperCase()}  上下文ID:[${data.context ?? ''}]  执行方法:[${data.message}]  ${opts.middleware ?? ''}耗时:${data.duration}  {\n    ${opts.log}\n}`
 }
 
 /**数据拆解**/
-export function fetchTransports(serverName: string, data: Omix) {
-    const name = chalk.hex('#ff5c93')(`服务名称:[${serverName}]`)
+export function fetchTransports(data: Omix) {
+    const name = chalk.hex('#ff5c93')(`服务名称:[${logName}]`)
     const pid = chalk.hex('#fc5404')(`服务进程:[${process.pid}]`)
     const timestamp = chalk.hex('#fb9300')(`${data.timestamp}`)
     const message = chalk.hex('#ff3d68')(`执行方法:[${data.message}]`)
@@ -57,7 +57,7 @@ export function fetchTransports(serverName: string, data: Omix) {
             transports: [
                 new winston.transports.DailyRotateFile({
                     level: 'debug',
-                    dirname: `logs/${CurrentServerName.toLowerCase()}`, //日志保存的目录
+                    dirname: `logs/${logName.toLowerCase()}`, //日志保存的目录
                     filename: '%DATE%.log', //日志名称，占位符 %DATE% 取值为 datePattern 值。
                     datePattern: 'YYYY-MM-DD', //日志轮换的频率，此处表示每天。
                     zippedArchive: true, //是否通过压缩的方式归档被轮换的日志文件。
@@ -67,11 +67,11 @@ export function fetchTransports(serverName: string, data: Omix) {
                         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
                         winston.format.json(),
                         winston.format.printf((data: Omix) => {
-                            const { url, module, duration } = fetchTransports(CurrentServerName, data)
+                            const { url, module, duration } = fetchTransports(data)
                             /**中间件日志**/
                             if (['LoggerMiddleware'].includes(String(data.message))) {
                                 console[data.level](`${module}  ${url}  ${duration}`, data.log)
-                                return fetchWrite(CurrentServerName, data, {
+                                return fetchWrite(data, {
                                     middleware: `接口地址:${data.log.url}  `,
                                     log: fetchReduces(data.log)
                                 })
@@ -80,18 +80,18 @@ export function fetchTransports(serverName: string, data: Omix) {
                             /**异常错误日志**/
                             if (data.log instanceof Error) {
                                 console[data.level](`${module}  ${url}  ${duration}`, data.log)
-                                return fetchWrite(CurrentServerName, data, { log: util.inspect(data.log, { depth: null }) })
+                                return fetchWrite(data, { log: util.inspect(data.log, { depth: null }) })
                             }
 
                             /**常规日志**/
                             if (typeof data.log === 'string') {
                                 console[data.level](`${module}  ${duration}  {\n    log: ${chalk.red(data.log)}\n}`)
-                                return fetchWrite(CurrentServerName, data, { log: `log: ${data.log}` })
+                                return fetchWrite(data, { log: `log: ${data.log}` })
                             }
 
                             /**其他日志**/
                             console[data.level](`${module}  ${duration}`, data.log)
-                            return fetchWrite(CurrentServerName, data, { log: fetchReduces(data.log) })
+                            return fetchWrite(data, { log: fetchReduces(data.log) })
                         })
                     )
                 })
