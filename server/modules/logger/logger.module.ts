@@ -8,6 +8,9 @@ import chalk from 'chalk'
 import util from 'util'
 import 'winston-daily-rotate-file'
 
+/**当前运行服务名称**/
+export const CurrentServerName = __dirname.split(`\\`).pop()
+
 /**对象数据转换**/
 export function fetchReduces(data: Omix) {
     const items = Object.keys(data ?? {}).map(key => `"${key.toString()}": ${JSON.stringify(data[key.toString()])}`)
@@ -46,58 +49,54 @@ export function fetchTransports(serverName: string, data: Omix) {
     return { url, module, duration }
 }
 
-@Module({ providers: [Logger], exports: [Logger] })
-export class LoggerModule {
-    public static forRoot(option: { name: string }): DynamicModule {
-        return {
-            global: true,
-            module: LoggerModule,
-            imports: [
-                WinstonModule.forRoot({
-                    transports: [
-                        new winston.transports.DailyRotateFile({
-                            level: 'debug',
-                            dirname: `logs/${option.name.toLowerCase()}`, //日志保存的目录
-                            filename: '%DATE%.log', //日志名称，占位符 %DATE% 取值为 datePattern 值。
-                            datePattern: 'YYYY-MM-DD', //日志轮换的频率，此处表示每天。
-                            zippedArchive: true, //是否通过压缩的方式归档被轮换的日志文件。
-                            maxSize: '20m', //设置日志文件的最大大小，m 表示 mb 。
-                            maxFiles: '30d', //保留日志文件的最大天数，此处表示自动删除超过30天的日志文件。
-                            format: winston.format.combine(
-                                winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
-                                winston.format.json(),
-                                winston.format.printf((data: Omix) => {
-                                    const { url, module, duration } = fetchTransports(option.name, data)
-                                    /**中间件日志**/
-                                    if (['LoggerMiddleware'].includes(String(data.message))) {
-                                        console[data.level](`${module}  ${url}  ${duration}`, data.log)
-                                        return fetchWrite(option.name, data, {
-                                            middleware: `接口地址:${data.log.url}  `,
-                                            log: fetchReduces(data.log)
-                                        })
-                                    }
-
-                                    /**异常错误日志**/
-                                    if (data.log instanceof Error) {
-                                        console[data.level](`${module}  ${url}  ${duration}`, data.log)
-                                        return fetchWrite(option.name, data, { log: util.inspect(data.log, { depth: null }) })
-                                    }
-
-                                    /**常规日志**/
-                                    if (typeof data.log === 'string') {
-                                        console[data.level](`${module}  ${duration}  {\n    log: ${chalk.red(data.log)}\n}`)
-                                        return fetchWrite(option.name, data, { log: `log: ${data.log}` })
-                                    }
-
-                                    /**其他日志**/
-                                    console[data.level](`${module}  ${duration}`, data.log)
-                                    return fetchWrite(option.name, data, { log: fetchReduces(data.log) })
+@Module({
+    providers: [Logger],
+    exports: [Logger],
+    imports: [
+        WinstonModule.forRoot({
+            transports: [
+                new winston.transports.DailyRotateFile({
+                    level: 'debug',
+                    dirname: `logs/${CurrentServerName.toLowerCase()}`, //日志保存的目录
+                    filename: '%DATE%.log', //日志名称，占位符 %DATE% 取值为 datePattern 值。
+                    datePattern: 'YYYY-MM-DD', //日志轮换的频率，此处表示每天。
+                    zippedArchive: true, //是否通过压缩的方式归档被轮换的日志文件。
+                    maxSize: '20m', //设置日志文件的最大大小，m 表示 mb 。
+                    maxFiles: '30d', //保留日志文件的最大天数，此处表示自动删除超过30天的日志文件。
+                    format: winston.format.combine(
+                        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
+                        winston.format.json(),
+                        winston.format.printf((data: Omix) => {
+                            const { url, module, duration } = fetchTransports(CurrentServerName, data)
+                            /**中间件日志**/
+                            if (['LoggerMiddleware'].includes(String(data.message))) {
+                                console[data.level](`${module}  ${url}  ${duration}`, data.log)
+                                return fetchWrite(CurrentServerName, data, {
+                                    middleware: `接口地址:${data.log.url}  `,
+                                    log: fetchReduces(data.log)
                                 })
-                            )
+                            }
+
+                            /**异常错误日志**/
+                            if (data.log instanceof Error) {
+                                console[data.level](`${module}  ${url}  ${duration}`, data.log)
+                                return fetchWrite(CurrentServerName, data, { log: util.inspect(data.log, { depth: null }) })
+                            }
+
+                            /**常规日志**/
+                            if (typeof data.log === 'string') {
+                                console[data.level](`${module}  ${duration}  {\n    log: ${chalk.red(data.log)}\n}`)
+                                return fetchWrite(CurrentServerName, data, { log: `log: ${data.log}` })
+                            }
+
+                            /**其他日志**/
+                            console[data.level](`${module}  ${duration}`, data.log)
+                            return fetchWrite(CurrentServerName, data, { log: fetchReduces(data.log) })
                         })
-                    ]
+                    )
                 })
             ]
-        }
-    }
-}
+        })
+    ]
+})
+export class LoggerModule {}

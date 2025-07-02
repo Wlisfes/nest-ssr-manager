@@ -7,7 +7,7 @@ import { ConfigModule } from '@server/modules/config/config.module'
 import { LoggerModule } from '@server/modules/logger/logger.module'
 
 @Module({
-    imports: [LoggerModule.forRoot({ name: 'web-client-server' }), ConfigModule],
+    imports: [LoggerModule, ConfigModule],
     providers: [
         { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
         { provide: APP_FILTER, useClass: HttpExceptionFilter }
