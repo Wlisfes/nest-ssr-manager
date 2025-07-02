@@ -7,6 +7,9 @@
     "license": "UNLICENSED",
     "scripts": {
         "install": "yarn install --ignore-scripts",
+        "dev:web-client-server": "cross-env NODE_ENV=development nest start --watch web-client-server",
+        "start:web-client-server": "cross-env NODE_ENV=production node dist/apps/web-client-server/main.js",
+        "build:web-client-server": "cross-env NODE_ENV=production nest build web-client-server",
         "dev:web-client-ssr-server": "cross-env NODE_ENV=development nest start --watch web-client-ssr-server",
         "start:web-client-ssr-server": "cross-env NODE_ENV=production node dist/apps/web-client-ssr-server/main.js",
         "build:web-client-ssr-server": "nest build web-client-ssr-server",

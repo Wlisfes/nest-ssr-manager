@@ -23,6 +23,15 @@
             "compilerOptions": {
                 "tsConfigPath": "apps/web-client-ssr-server/tsconfig.app.json"
             }
+        },
+        "web-client-server": {
+            "type": "application",
+            "root": "apps/web-client-server",
+            "entryFile": "main",
+            "sourceRoot": "apps/web-client-server/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/web-client-server/tsconfig.app.json"
+            }
         }
     }
 }

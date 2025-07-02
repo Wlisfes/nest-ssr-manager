@@ -26,6 +26,7 @@
         "paths": {
             "@/*": ["./web/*"],
             "@server/*": ["./server/*"],
+            "@web-client-server/*": ["apps/web-client-server/src/*"],
             "@web-client-ssr-server/*": ["apps/web-client-ssr-server/src/*"]
         }
     },

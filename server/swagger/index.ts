@@ -6,7 +6,7 @@ import express from 'express'
 export interface SetupOptions extends Omix {
     title: string
     description: string
-    port: number
+    port: number | string
 }
 
 /**文档挂载**/
