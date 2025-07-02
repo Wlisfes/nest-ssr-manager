@@ -1,5 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common'
-import { moment } from '@server/utils/utils.instance'
+import { moment } from '@server/utils'
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {

@@ -1,7 +1,7 @@
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common'
 import { Request, Response, NextFunction } from 'express'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
-import { fetchIntNumber, fetchIPClient } from '@server/utils/utils.instance'
+import { fetchIntNumber, fetchIPClient } from '@server/utils'
 import { Logger } from 'winston'
 
 @Injectable()

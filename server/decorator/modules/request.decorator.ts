@@ -2,10 +2,8 @@ import { ApiOperationOptions, ApiResponseOptions, getSchemaPath, ApiExtraModels 
 import { ApiOperation, ApiConsumes, ApiProduces, ApiResponse, ApiBearerAuth } from '@nestjs/swagger'
 import { applyDecorators, Type } from '@nestjs/common'
 import { Throttle, SkipThrottle } from '@nestjs/throttler'
-import { AuthClientOptions, ApiClientGuardReflector } from '@server/guard/auth.client.guard'
-import { AuthSystemOptions, ApiSystemGuardReflector } from '@server/guard/auth.system.guard'
-import { ThrottlerOptions } from '@server/guard/auth.throttler.guard'
 import { isEmpty } from 'class-validator'
+import { AuthClientOptions, AuthSystemOptions, ThrottlerOptions, ApiClientGuardReflector, ApiSystemGuardReflector } from '@server/guard'
 
 export interface ApiDecoratorOptions {
     /**接口描述**/
