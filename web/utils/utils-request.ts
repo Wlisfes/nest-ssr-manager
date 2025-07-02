@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 export const request: AxiosRequest = axios.create({
-    baseURL: import.meta.env.NODE_API_BASEURL,
+    baseURL: import.meta.env.NODE_CLIENT_SSR_BASEURL,
     timeout: 90000
 })
 

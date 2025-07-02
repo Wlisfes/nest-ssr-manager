@@ -21,10 +21,10 @@ declare interface Window {
 declare interface EnvOptions {
     /**环境标识**/
     NODE_ENV: 'development' | 'production'
-    /**服务端口号**/
-    NODE_CLIENT_PORT: number
-    /**接口API地址**/
-    NODE_API_BASEURL: string
+    /**客户端SSR服务端口号**/
+    NODE_CLIENT_SSR_PORT: number
+    /**客户端SSR服务请求地址**/
+    NODE_CLIENT_SSR_BASEURL: string
     /**网站标题**/
     NODE_SEO_TITLE: string
     /**网站副标题**/
