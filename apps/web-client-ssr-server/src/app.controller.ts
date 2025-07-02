@@ -1,5 +1,5 @@
 import { Controller, Get, Header, Request } from '@nestjs/common'
-import { createRouteServer } from '@web-ssr-server/vite.server'
+import { createRouteServer } from 'apps/web-client-ssr-server/src/vite.server'
 
 @Controller()
 export class AppController {

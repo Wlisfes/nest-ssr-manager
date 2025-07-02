@@ -2,7 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "declaration": false,
-        "outDir": "../../dist/apps/web-ssr-server"
+        "outDir": "../../dist/apps/web-client-ssr-server"
     },
     "include": ["src/**/*", "../../env.d.ts"],
     "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]

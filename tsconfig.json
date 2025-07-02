@@ -26,7 +26,7 @@
         "paths": {
             "@/*": ["./web/*"],
             "@server/*": ["./server/*"],
-            "@web-ssr-server/*": ["./apps/web-ssr-server/src/*"]
+            "@web-client-ssr-server/*": ["apps/web-client-ssr-server/src/*"]
         }
     },
     "exclude": ["dist", "node_modules"]

@@ -7,11 +7,11 @@
     "license": "UNLICENSED",
     "scripts": {
         "install": "yarn install --ignore-scripts",
-        "dev:web-ssr-server": "cross-env NODE_ENV=development nest start --watch web-ssr-server",
-        "start:web-ssr-server": "cross-env NODE_ENV=production node dist/apps/web-ssr-server/main.js",
-        "build:web-ssr-server": "nest build web-ssr-server",
-        "dev": "npm run dev:web-ssr-server",
-        "build": "npm run build:web && npm run build:web-ssr-server",
+        "dev:web-client-ssr-server": "cross-env NODE_ENV=development nest start --watch web-client-ssr-server",
+        "start:web-client-ssr-server": "cross-env NODE_ENV=production node dist/apps/web-client-ssr-server/main.js",
+        "build:web-client-ssr-server": "nest build web-client-ssr-server",
+        "dev": "npm run dev:web-client-ssr-server",
+        "build": "npm run build:web && npm run build:web-client-ssr-server",
         "build:web": "npm run build:web:client && npm run build:web:server",
         "build:web:client": "vite --config web/vite.config.ts build --ssrManifest --outDir ../build/client",
         "build:web:server": "vite --config web/vite.config.ts build --ssr entry-server --outDir ../build/server"

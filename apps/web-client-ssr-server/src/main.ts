@@ -1,7 +1,7 @@
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { NestFactory } from '@nestjs/core'
-import { AppModule } from '@web-ssr-server/app.module'
-import { createViteServer } from '@web-ssr-server/vite.server'
+import { AppModule } from 'apps/web-client-ssr-server/src/app.module'
+import { createViteServer } from 'apps/web-client-ssr-server/src/vite.server'
 import { resolve } from 'path'
 import compression from 'compression'
 
