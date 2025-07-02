@@ -4,9 +4,10 @@ import { UserAgentMiddleware, LoggerMiddleware } from '@server/middleware'
 import { TransformInterceptor } from '@server/interceptor'
 import { HttpExceptionFilter } from '@server/filters'
 import { ConfigModule } from '@server/modules/config/config.module'
+import { LoggerModule } from '@server/modules/logger/logger.module'
 
 @Module({
-    imports: [ConfigModule],
+    imports: [LoggerModule.forRoot({ name: 'web-client-server' }), ConfigModule],
     providers: [
         { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
         { provide: APP_FILTER, useClass: HttpExceptionFilter }
