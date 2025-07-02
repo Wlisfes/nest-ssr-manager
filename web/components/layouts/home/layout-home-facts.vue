@@ -1,10 +1,12 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
+import { useMouse, useStore } from '@/store'
 import { useState } from '@/hooks/hook-state'
 
 export default defineComponent({
     name: 'LayoutHomeFacts',
     setup(props) {
+        const { inverted } = useStore(useMouse)
         const { state } = useState({
             hot: 'Important Facts About SMS',
             title: `关于 SMS 的重要事实-在移动互联网时代，SMS 是接触潜在客户的最直接方式之一`,
@@ -36,7 +38,7 @@ export default defineComponent({
                     </div>
                 </div>
                 <div data-aos="fade-up">
-                    <n-card embedded bordered={false} class="chat-super-card overflow-hidden" content-class="p-0!">
+                    <n-card embedded bordered={false} class={{ 'chat-super-card': true, 'is-light': !inverted.value }}>
                         <div class="chat-super flex flex-col items-center">
                             <div class="flex flex-col items-center justify-center">
                                 <div class="flex items-center gap-5 p-be-10">
@@ -52,7 +54,7 @@ export default defineComponent({
                                 </n-h1>
                             </div>
                             <n-button class="min-w-120" size="large" type="primary">
-                                立即使用
+                                <n-text>立即使用</n-text>
                             </n-button>
                         </div>
                     </n-card>
@@ -156,8 +158,18 @@ export default defineComponent({
 .chat-super-card {
     --n-border-radius: 12px;
     margin-block-end: 80px;
+    &.is-light {
+        --n-color-embedded: #0a1425;
+        .n-h,
+        .n-text {
+            --n-text-color: var(--n-color-modal);
+        }
+    }
     @media (max-width: 580px) {
         margin-block-end: 48px;
+    }
+    :deep(.n-card__content) {
+        padding: 0;
     }
 }
 </style>
