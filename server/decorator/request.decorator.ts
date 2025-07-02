@@ -1,25 +1,38 @@
 import { ApiOperationOptions, ApiResponseOptions, getSchemaPath, ApiExtraModels } from '@nestjs/swagger'
 import { ApiOperation, ApiConsumes, ApiProduces, ApiResponse, ApiBearerAuth } from '@nestjs/swagger'
 import { applyDecorators, Type } from '@nestjs/common'
+import { Throttle, SkipThrottle } from '@nestjs/throttler'
+import { isEmpty, isNotEmpty, isNotEmptyObject } from 'class-validator'
+import { ThrottlerOptions } from '@server/guard/auth.throttler.guard'
+import { AuthGuardOptions } from '@server/guard/auth.guard'
 
-export interface OptionDecorator {
+export interface ApiDecoratorOptions {
     operation: ApiOperationOptions
     response: ApiResponseOptions
     customize: { status: number; description: string; type: Type<unknown> }
-    // authorize: AuthGuardOption
+    authorize: AuthGuardOptions
     consumes: string[]
     produces: string[]
     skipThrottle: boolean
-    // throttle: keyof typeof thr.WEB_THROTTLE | Parameters<typeof Throttle>['0']
+    throttle: keyof typeof ThrottlerOptions | Parameters<typeof Throttle>['0']
 }
 
-export function ApiDecorator(option: Partial<OptionDecorator> = {}) {
+export function ApiDecorator(option: Partial<ApiDecoratorOptions> = {}) {
     const consumes = option.consumes ?? ['application/x-www-form-urlencoded', 'application/json']
     const produces = option.produces ?? ['application/json', 'application/xml']
-    const decorator: Array<any> = [ApiOperation(option.operation), ApiConsumes(...consumes), ApiProduces(...produces)]
+    const decorators: Array<any> = [ApiOperation(option.operation), ApiConsumes(...consumes), ApiProduces(...produces)]
+    if (option.skipThrottle) {
+        decorators.push(SkipThrottle())
+    } else if (isEmpty(option.throttle)) {
+        decorators.push(Throttle({ default: ThrottlerOptions.default }))
+    } else if (option.throttle && typeof option.throttle === 'string') {
+        decorators.push(Throttle({ [option.throttle]: ThrottlerOptions[option.throttle] }))
+    } else if (typeof option.throttle === 'object') {
+        decorators.push(Throttle(option.throttle))
+    }
 
     if (option.customize) {
-        decorator.push(
+        decorators.push(
             ApiExtraModels(option.customize.type),
             ApiResponse({
                 status: option.customize.status,
@@ -42,8 +55,8 @@ export function ApiDecorator(option: Partial<OptionDecorator> = {}) {
             })
         )
     } else {
-        decorator.push(ApiResponse(option.response))
+        decorators.push(ApiResponse(option.response))
     }
 
-    return applyDecorators(...decorator)
+    return applyDecorators(...decorators)
 }
