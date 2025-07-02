@@ -13,8 +13,8 @@
         "dev": "npm run dev:web-client-ssr-server",
         "build": "npm run build:web && npm run build:web-client-ssr-server",
         "build:web": "npm run build:web:client && npm run build:web:server",
-        "build:web:client": "vite --config web/vite.config.ts build --ssrManifest --outDir ../build/client",
-        "build:web:server": "vite --config web/vite.config.ts build --ssr entry-server --outDir ../build/server"
+        "build:web:client": "vite --config web/vite.config.ts build --ssrManifest --outDir ../build/web/client",
+        "build:web:server": "vite --config web/vite.config.ts build --ssr entry-server --outDir ../build/web/server"
     },
     "dependencies": {
         "@faker-js/faker": "^8.4.1",

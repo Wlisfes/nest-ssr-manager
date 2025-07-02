@@ -55,9 +55,9 @@ export class WebClient {
     public render: Function = () => ({})
     constructor() {
         if (!WebClient.instance) {
-            this.template = readFileSync(resolve(process.cwd(), 'build/client/index.html'), 'utf-8')
-            this.manifest = require('../../../build/client/ssr-manifest.json')
-            this.render = require('../../../build/server/entry-server.js').render
+            this.template = readFileSync(resolve(process.cwd(), 'build/web/client/index.html'), 'utf-8')
+            this.manifest = require('../../../build/web/client/ssr-manifest.json')
+            this.render = require('../../../build/web/server/entry-server.js').render
             WebClient.instance = this
         }
         return WebClient.instance
