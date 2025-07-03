@@ -18,7 +18,7 @@
         "esModuleInterop": true,
         "noImplicitAny": false,
         "lib": ["esnext", "dom"],
-        "types": ["../env.d.ts", "./client.d.ts", "vite/client"],
+        "types": ["../../env.d.ts", "./client.d.ts", "vite/client"],
         "baseUrl": ".",
         "paths": {
             "@/*": ["./*"]

@@ -72,7 +72,7 @@ export async function createRouteServer(request: Request) {
         return await fetchContentRender(client.template, options)
     } else {
         const vite = await createViteServer()
-        const html = readFileSync(resolve(process.cwd(), 'web/index.html'), 'utf-8')
+        const html = readFileSync(resolve(process.cwd(), 'web/client/index.html'), 'utf-8')
         const element = await vite.transformIndexHtml(request.originalUrl, html)
         return await vite.ssrLoadModule('./entry-server.ts').then(async ({ render }) => {
             const options = await render(request, {})

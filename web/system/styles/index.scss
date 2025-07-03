@@ -1,0 +1,23 @@
+@import 'aos-observer/dist/aos.css';
+
+/**image组件样式穿透**/
+.n-image.elemeent-customize img {
+    width: 100%;
+    display: block;
+}
+
+/**通知提示二次封装**/
+.n-notification-wrapper.custom-notify-service {
+    .n-notification__avatar {
+        position: static;
+        padding: 16px 10px 16px 0;
+    }
+    .n-notification-main,
+    .n-notification-main__content {
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex;
+        flex: 1;
+    }
+}
