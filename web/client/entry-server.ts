@@ -1,6 +1,6 @@
 import { renderToString } from 'vue/server-renderer'
 import { Request } from 'express'
-import { isPromise } from '@/utils/is'
+import { isPromise } from '@webpack/utils'
 import { createAppServer } from '@/main'
 import { useGlobal } from '@/store'
 

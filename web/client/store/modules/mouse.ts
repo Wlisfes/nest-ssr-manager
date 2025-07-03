@@ -1,9 +1,8 @@
 import { toRefs, computed } from 'vue'
 import { darkTheme, lightTheme } from 'naive-ui'
 import { defineStore } from 'pinia'
-import { themeOverrides } from '@/utils/utils-theme'
-import { useState } from '@/hooks/hook-state'
-import { useCoutext, AUTH } from '@/hooks/hook-context'
+import { themeOverrides } from '@webpack/utils'
+import { useState, useCoutext, AUTH } from '@webpack/hooks'
 
 export const useMouse = defineStore('APP_NEST_MOUSE_STORE', () => {
     const { cookies } = useCoutext()

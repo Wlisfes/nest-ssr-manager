@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { defineComponent, onMounted } from 'vue'
 import { useGlobal, useMouse, useStore } from '@/store'
-import { useAosObserver } from '@/hooks/hook-aos-observer'
+import { useAosObserver } from '@webpack/hooks'
 
 export default defineComponent({
     name: 'LayoutClient',

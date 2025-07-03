@@ -1,4 +1,4 @@
-import { isPromise } from '@/utils/is'
+import { isPromise } from '@webpack/utils'
 import { createAppServer } from '@/main'
 import { locale } from '@/i18n'
 const { app, router, pinia, fetchWinston } = createAppServer({ ssr: false })

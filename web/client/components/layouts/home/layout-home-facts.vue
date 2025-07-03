@@ -1,7 +1,7 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
 import { useMouse, useStore } from '@/store'
-import { useState } from '@/hooks/hook-state'
+import { useState } from '@webpack/hooks'
 
 export default defineComponent({
     name: 'LayoutHomeFacts',

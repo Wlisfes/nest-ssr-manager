@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { useState } from '@/hooks/hook-state'
+import { useState } from '@webpack/hooks'
 
 export default defineComponent({
     name: 'LayoutHomeIssues',

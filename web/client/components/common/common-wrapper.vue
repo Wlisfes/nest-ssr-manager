@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { defineComponent, h, PropType, VNode, Fragment } from 'vue'
-import { iconNames } from '@/utils/utils-common'
+import { iconNames } from '@/utils'
 
 export default defineComponent({
     name: 'CommonWrapper',
