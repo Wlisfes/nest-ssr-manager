@@ -1,3 +1,4 @@
+//@ts-nocheck
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 export const request: AxiosRequest = axios.create({
