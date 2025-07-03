@@ -18,7 +18,23 @@ export default defineComponent({
                                 <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
                             </n-button>
                         </router-link>
-                        <n-element class="h-full flex-1 p-inline-40">sdasd</n-element>
+                        <n-element class="h-full flex flex-1 items-center justify-end gap-48 p-inline-40">
+                            <n-button text focusable={false}>
+                                <div class="text-16">产品</div>
+                            </n-button>
+                            <n-button text focusable={false}>
+                                <div class="text-16">解决方案</div>
+                            </n-button>
+                            <n-button text focusable={false}>
+                                <div class="text-16">覆盖范围&定价</div>
+                            </n-button>
+                            <n-button text focusable={false}>
+                                <div class="text-16">支持中心</div>
+                            </n-button>
+                            <n-button text focusable={false}>
+                                <div class="text-16">关于我们</div>
+                            </n-button>
+                        </n-element>
                         <n-element class="h-full flex items-center overflow-hidden">
                             <layout-common-deploy></layout-common-deploy>
                             <n-divider vertical class="h-20! m-inline-20!" />
