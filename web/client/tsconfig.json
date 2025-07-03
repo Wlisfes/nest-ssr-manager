@@ -18,11 +18,11 @@
         "esModuleInterop": true,
         "noImplicitAny": false,
         "lib": ["esnext", "dom"],
-        "types": ["../../env.d.ts", "./client.d.ts", "vite/client"],
+        "types": ["../../env.d.ts", "../webpack/web.d.ts", "vite/client"],
         "baseUrl": ".",
         "paths": {
             "@/*": ["./*"],
-            "@web/*": ["../*"]
+            "@webpack/*": ["../webpack/*"]
         }
     },
     "include": ["./*.d.ts", "./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue"]

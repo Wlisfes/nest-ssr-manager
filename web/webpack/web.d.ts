@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 import { AxiosInstance, InternalAxiosRequestConfig, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { RouteLocationNormalizedLoaded, Router } from 'vue-router'
-import { ResultResolver } from '@/interface/instance.resolver'
+import { ResultResolver } from './interface'
 import { Request } from 'express'
 import { Pinia } from 'pinia'
 import { Logger } from 'winston'

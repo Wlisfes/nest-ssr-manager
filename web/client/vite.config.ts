@@ -31,8 +31,8 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
         },
         resolve: {
             alias: {
-                '@web': resolve(__dirname, '../'),
-                '@': resolve(__dirname, './')
+                '@': resolve(__dirname, './'),
+                '@webpack': resolve(__dirname, '../webpack/')
             }
         },
         plugins: [
