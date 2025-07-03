@@ -22,7 +22,7 @@ export function fetchEnvService(mode: string) {
 
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     return {
-        root: 'web',
+        root: 'web/client',
         define: fetchEnvService(mode),
         build: {
             rollupOptions: {
@@ -31,6 +31,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
         },
         resolve: {
             alias: {
+                '@web': resolve(__dirname, '../'),
                 '@': resolve(__dirname, './')
             }
         },

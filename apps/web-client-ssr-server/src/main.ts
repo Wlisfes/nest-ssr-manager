@@ -10,7 +10,7 @@ async function bootstrap() {
         cors: true
     })
     if (process.env.NODE_ENV === 'production') {
-        app.useStaticAssets(resolve(process.cwd(), 'build/web/client'), { index: false })
+        app.useStaticAssets(resolve(process.cwd(), 'build/web-client/client'), { index: false })
         app.use(compression())
     } else {
         const vite = await createViteServer()

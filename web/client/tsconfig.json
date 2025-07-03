@@ -21,7 +21,8 @@
         "types": ["../../env.d.ts", "./client.d.ts", "vite/client"],
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./*"]
+            "@/*": ["./*"],
+            "@web/*": ["../*"]
         }
     },
     "include": ["./*.d.ts", "./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue"]

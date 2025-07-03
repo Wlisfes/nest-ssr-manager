@@ -9,7 +9,7 @@ export async function createViteServer() {
         return viteServer
     }
     return (viteServer = await createServer({
-        root: 'web',
+        root: 'web/client',
         appType: 'custom',
         server: {
             middlewareMode: true
@@ -48,28 +48,28 @@ export async function fetchContentRender(html: string, opts: EntryOptions) {
 }
 
 /**生产环境配置**/
-export class WebClient {
-    private static instance: WebClient
+export class WebServer {
+    private static instance: WebServer
     public template: string = ''
     public manifest: Record<string, any> = {}
     public render: Function = () => ({})
     constructor() {
-        if (!WebClient.instance) {
-            this.template = readFileSync(resolve(process.cwd(), 'build/web/client/index.html'), 'utf-8')
-            this.manifest = require('../../../build/web/client/ssr-manifest.json')
-            this.render = require('../../../build/web/server/entry-server.js').render
-            WebClient.instance = this
+        if (!WebServer.instance) {
+            this.template = readFileSync(resolve(process.cwd(), 'build/web-client/client/index.html'), 'utf-8')
+            this.manifest = require('../../../build/web-client/client/ssr-manifest.json')
+            this.render = require('../../../build/web-client/server/entry-server.js').render
+            WebServer.instance = this
         }
-        return WebClient.instance
+        return WebServer.instance
     }
 }
 
 /**Web路由渲染**/
 export async function createRouteServer(request: Request) {
     if (process.env.NODE_ENV === 'production') {
-        const client = new WebClient()
-        const options = await client.render(request, client.manifest)
-        return await fetchContentRender(client.template, options)
+        const webServer = new WebServer()
+        const options = await webServer.render(request, webServer.manifest)
+        return await fetchContentRender(webServer.template, options)
     } else {
         const vite = await createViteServer()
         const html = readFileSync(resolve(process.cwd(), 'web/client/index.html'), 'utf-8')
