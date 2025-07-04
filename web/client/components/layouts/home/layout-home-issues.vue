@@ -59,11 +59,11 @@ export default defineComponent({
                             {state.document}
                         </n-text>
                     </div>
-                    <div class="flex items-end justify-center gap-16">
-                        <n-button size="large" type="primary" data-aos="fade-left">
+                    <div class="flex items-end justify-center gap-16" data-aos="fade-left">
+                        <n-button size="large" type="primary">
                             前往支持中心
                         </n-button>
-                        <n-button size="large" type="primary" ghost data-aos="fade-left">
+                        <n-button size="large" type="primary" ghost>
                             联系我们
                         </n-button>
                     </div>
