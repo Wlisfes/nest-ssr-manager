@@ -51,6 +51,7 @@
         "enum-plus": "^2.3.2",
         "express": "^4.17.13",
         "express-useragent": "^1.0.15",
+        "lodash-es": "^4.17.21",
         "mysql2": "^3.14.0",
         "naive-ui": "^2.41.0",
         "nest-winston": "^1.9.4",

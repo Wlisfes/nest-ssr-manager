@@ -1,10 +1,9 @@
 <script lang="tsx">
-import { defineComponent, onMounted } from 'vue'
-import { useGlobal, useMouse, useStore } from '@/store'
+import { defineComponent } from 'vue'
 import { useAosObserver } from '@webpack/hooks'
 
 export default defineComponent({
-    name: 'LayoutClient',
+    name: 'SsrLayout',
     setup(props) {
         const { fetchScrollbar } = useAosObserver()
 

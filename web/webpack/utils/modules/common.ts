@@ -34,6 +34,11 @@ export async function fetchParameter<T>(data: T) {
     return data
 }
 
+/**多数组合并**/
+export function fetchConcat<T>(...list: Array<Array<Omix<T>>>) {
+    return [].concat(list.flat(Infinity)) as Array<Omix<T>>
+}
+
 /**延时方法**/
 export function fetchDelay<T>(delay = 100, handler?: Function): Promise<T> {
     return new Promise(resolve => {
