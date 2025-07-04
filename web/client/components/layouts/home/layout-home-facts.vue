@@ -42,7 +42,11 @@ export default defineComponent({
                         <div class="chat-super flex flex-col items-center">
                             <div class="flex flex-col items-center justify-center">
                                 <div class="flex items-center gap-5 p-be-10">
-                                    <common-wrapper size={36} color="var(--primary-color)" name="nest-issues-chat"></common-wrapper>
+                                    <common-element-wrapper
+                                        size={36}
+                                        color="var(--primary-color)"
+                                        name="nest-issues-chat"
+                                    ></common-element-wrapper>
                                     <n-text class="text-18" strong>
                                         ChatBook
                                     </n-text>

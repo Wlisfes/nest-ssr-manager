@@ -12,9 +12,9 @@ export default defineComponent({
                 <n-button text focusable={false} onClick={() => fetchThemeUpdate()}>
                     <div class="w-24 flex justify-center items-center">
                         {theme.value === 'dark' ? (
-                            <common-wrapper name="nest-light" size={24}></common-wrapper>
+                            <common-element-wrapper name="nest-light" size={24}></common-element-wrapper>
                         ) : (
-                            <common-wrapper name="nest-dark" size={22}></common-wrapper>
+                            <common-element-wrapper name="nest-dark" size={22}></common-element-wrapper>
                         )}
                     </div>
                 </n-button>

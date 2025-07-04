@@ -73,7 +73,7 @@ export default defineComponent({
                         <div key={index} class="chat-block-column" data-aos="fade-up" data-aos-delay={index * 100}>
                             <n-card hoverable content-class="p-24!" class="b-rd-8 h-full">
                                 <n-button secondary circle focusable={false} type={item.type} class="w-64 h-64">
-                                    <common-wrapper name={item.icon} size={32}></common-wrapper>
+                                    <common-element-wrapper name={item.icon} size={32}></common-element-wrapper>
                                 </n-button>
                                 <div class="flex flex-col gap-5 m-bs-10">
                                     <h1 class="m-0 text-18">{item.title}</h1>

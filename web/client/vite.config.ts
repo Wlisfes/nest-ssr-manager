@@ -45,7 +45,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
             Components({
                 deep: true,
                 extensions: ['vue'],
-                dirs: ['./components', '../webpack/components'],
+                dirs: ['./components'],
                 dts: './web.components.d.ts',
                 resolvers: [NaiveUiResolver()]
             }),

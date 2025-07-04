@@ -14,7 +14,11 @@ export default defineComponent({
                     <n-element class="common-width-inline h-60 flex gap-20 overflow-hidden">
                         <router-link to="/" class="flex overflow-hidden">
                             <n-button text focusable={false}>
-                                <common-wrapper name="nest-logo" color="var(--n-text-color-hover)" size={40}></common-wrapper>
+                                <common-element-wrapper
+                                    name="nest-logo"
+                                    color="var(--n-text-color-hover)"
+                                    size={40}
+                                ></common-element-wrapper>
                                 <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
                             </n-button>
                         </router-link>

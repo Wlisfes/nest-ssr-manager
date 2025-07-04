@@ -8,13 +8,13 @@ export default defineComponent({
             <n-element class="main-layout w-full h-full flex flex-col justify-end items-end">
                 <router-link to="/" class="flex absolute top-10 left-20">
                     <n-button text focusable={false}>
-                        <common-wrapper name="nest-logo" color="var(--n-text-color-hover)" size={40}></common-wrapper>
+                        <common-element-wrapper name="nest-logo" color="var(--n-text-color-hover)" size={40}></common-element-wrapper>
                         <h2 class="m-0 p-bs-8 p-inline-5">ChatBook</h2>
                     </n-button>
                 </router-link>
                 <n-card class="max-w-480">
                     <n-button text focusable={false}>
-                        <common-wrapper name="nest-logo" color="var(--n-text-color-hover)" size={36}></common-wrapper>
+                        <common-element-wrapper name="nest-logo" color="var(--n-text-color-hover)" size={36}></common-element-wrapper>
                         <h2 class="m-0 text-18 p-bs-8 p-inline-8">欢迎使用 ChatBook</h2>
                     </n-button>
                     <router-view></router-view>

@@ -55,20 +55,24 @@ export default defineComponent({
                     <div class="chat-book flex flex-col w-[var(--chat-book-width)] min-w-[var(--chat-book-min-width)] p-ie-16">
                         <router-link to="/" class="flex overflow-hidden p-be-16">
                             <n-button text focusable={false}>
-                                <common-wrapper name="nest-logo" color="var(--n-text-color-hover)" size={32}></common-wrapper>
+                                <common-element-wrapper
+                                    name="nest-logo"
+                                    color="var(--n-text-color-hover)"
+                                    size={32}
+                                ></common-element-wrapper>
                                 <h2 class="m-0 p-bs-8 p-inline-5 text-18">{state.chatBook.title}</h2>
                             </n-button>
                         </router-link>
                         <n-text depth={3}>{state.chatBook.document}</n-text>
                         <div class="flex gap-10 overflow-hidden p-bs-20">
                             <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
-                                <common-wrapper name="nest-telegram" size={20}></common-wrapper>
+                                <common-element-wrapper name="nest-telegram" size={20}></common-element-wrapper>
                             </n-button>
                             <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
-                                <common-wrapper name="nest-whatsapp" size={20}></common-wrapper>
+                                <common-element-wrapper name="nest-whatsapp" size={20}></common-element-wrapper>
                             </n-button>
                             <n-button focusable={false} secondary type="primary" class="p-inline-10! h-40">
-                                <common-wrapper name="nest-solid-main" size={20}></common-wrapper>
+                                <common-element-wrapper name="nest-solid-main" size={20}></common-element-wrapper>
                             </n-button>
                         </div>
                     </div>

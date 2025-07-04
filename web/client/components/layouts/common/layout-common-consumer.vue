@@ -8,15 +8,15 @@ export default defineComponent({
         return () => (
             <n-element class="layout-common-consumer h-full flex items-center gap-28">
                 {/* <n-button text focusable={false}>
-                    <common-wrapper name="nest-search" size={24}></common-wrapper>
+                    <common-element-wrapper name="nest-search" size={24}></common-element-wrapper>
                 </n-button>
                 <n-button text focusable={false}>
                     <n-badge type="info" offset={[5, 0]} value={40} max={99}>
-                        <common-wrapper name="nest-cart" size={24}></common-wrapper>
+                        <common-element-wrapper name="nest-cart" size={24}></common-element-wrapper>
                     </n-badge>
                 </n-button> */}
                 <n-button text focusable={false}>
-                    <common-wrapper name="nest-user" size={24}></common-wrapper>
+                    <common-element-wrapper name="nest-user" size={24}></common-element-wrapper>
                 </n-button>
             </n-element>
         )

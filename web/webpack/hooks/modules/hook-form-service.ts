@@ -1,40 +1,41 @@
 import { ref, Ref, toRefs, onMounted } from 'vue'
-import { FormInst, FormRules, FormItemRule } from 'naive-ui'
+import { FormInst, FormRules } from 'naive-ui'
 import { isEmpty } from 'class-validator'
 import { useState } from './hook-state'
 import { fetchHandler } from '../../utils'
 
-export type FormState<R> = Omix & {
+export interface FormState<R> {
     initialize: boolean
     disabled: boolean
     visible: boolean
     loading: boolean
     rules: R
 }
-export type FormOption<T, R, U> = Partial<FormState<R>> & {
+
+export interface FormOption<T, R, U> extends Partial<FormState<R>> {
     mounted?: boolean
-    option?: Omix<U>
+    options?: Omix<U>
     form: Omix<T>
     callback?: Function
 }
 
 /**自定义表单Hooks**/
-export function useFormService<T extends Omix, R extends FormRules, U extends Omix>(option: FormOption<T, R, U>) {
+export function useFormService<T extends Omix, R extends FormRules, U extends Omix>(opts: FormOption<T, R, U>) {
     const formRef = ref<FormInst>() as Ref<FormInst & Omix<{ $el: HTMLFormElement }>>
-    const form = ref<typeof option.form>(option.form)
+    const form = ref<typeof opts.form>(opts.form)
     const { state, setState } = useState({
-        initialize: option.initialize ?? true,
-        disabled: option.disabled ?? false,
-        visible: option.visible ?? false,
-        loading: option.loading ?? false,
-        rules: option.rules ?? {},
-        ...(option.option ?? {})
-    } as FormState<R> & typeof option.option)
+        initialize: opts.initialize ?? true,
+        disabled: opts.disabled ?? false,
+        visible: opts.visible ?? false,
+        loading: opts.loading ?? false,
+        rules: opts.rules ?? {},
+        ...(opts.options ?? {})
+    } as FormState<R> & typeof opts.options)
 
     onMounted(async () => {
-        return await fetchHandler(Boolean(option.mounted ?? true), async () => {
+        return await fetchHandler(Boolean(opts.mounted ?? true), async () => {
             return await setState({ visible: true } as never).then(() => {
-                return option.callback?.()
+                return opts.callback?.()
             })
         })
     })
@@ -43,35 +44,20 @@ export function useFormService<T extends Omix, R extends FormRules, U extends Om
         return Object.assign(form.value, data)
     }
 
-    /**批量验证表单字段**/
-    function fetchRuleCheck(keys: Array<string>, rule: FormItemRule) {
-        if (keys.length === 0 || isEmpty(rule.key)) {
-            return true
-        }
-        return keys.includes(rule.key as string)
-    }
-
     /**验证表单**/
     function fetchValidater(keys: Array<string> = []): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            if (!formRef.value) {
-                return reject('不存在formRef实例')
-            }
+            if (!formRef.value) return reject('不存在formRef实例')
             try {
-                await setState({ loading: true, disabled: true } as never)
-                return formRef.value.validate(
-                    errors => {
-                        if (errors) {
-                            return resolve(errors)
-                        }
-                        return resolve(false)
-                    },
-                    rule => fetchRuleCheck(keys, rule)
+                return await formRef.value.validate(
+                    errors => resolve(isEmpty(errors)),
+                    function (rule) {
+                        if (keys.length === 0 || isEmpty(rule.key)) return true
+                        return keys.includes(rule.key as string)
+                    }
                 )
             } catch (err) {
-                return await setState({ loading: false, disabled: false } as never).then(() => {
-                    return resolve(false)
-                })
+                return resolve(false)
             }
         })
     }

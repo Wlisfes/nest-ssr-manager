@@ -27,7 +27,7 @@ export default defineComponent({
                 {{
                     trigger: () => (
                         <div class="flex gap-5 items-center justify-end select-none cursor-pointer">
-                            <common-wrapper name="nest-i18n" size={24}></common-wrapper>
+                            <common-element-wrapper name="nest-i18n" size={24}></common-element-wrapper>
                             <span class="text-13">简体中文</span>
                         </div>
                     ),
