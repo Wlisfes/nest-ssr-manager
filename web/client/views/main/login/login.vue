@@ -6,7 +6,7 @@ import { enter } from '@webpack/utils'
 export default defineComponent({
     name: 'MainLogin',
     setup(props) {
-        const { formRef, form, state, setState, fetchValidater } = useFormService({
+        const { formRef, form, rules, state, setState, fetchValidater } = useFormService({
             form: {
                 email: '',
                 password: '',
@@ -19,8 +19,6 @@ export default defineComponent({
             },
             COMMON_TYPE_OPTIONS: [{ value: 1, label: '成功' }]
         })
-
-        console.log(state)
 
         async function fetchSubmit() {
             return await fetchValidater().then(async result => {
