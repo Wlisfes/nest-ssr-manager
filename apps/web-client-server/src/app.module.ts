@@ -5,9 +5,10 @@ import { TransformInterceptor } from '@server/interceptor'
 import { HttpExceptionFilter } from '@server/filters'
 import { ConfigModule } from '@server/modules/config/config.module'
 import { LoggerModule } from '@server/modules/logger/logger.module'
+import { DatabaseModule } from '@server/modules/database/database.module'
 
 @Module({
-    imports: [LoggerModule, ConfigModule],
+    imports: [LoggerModule, ConfigModule, DatabaseModule],
     providers: [
         { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
         { provide: APP_FILTER, useClass: HttpExceptionFilter }
