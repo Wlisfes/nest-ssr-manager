@@ -1,36 +1,33 @@
 import { ref, Ref, toRefs, onMounted } from 'vue'
-import { FormInst, FormRules } from 'naive-ui'
+import { FormInst, FormItemRule } from 'naive-ui'
 import { isEmpty } from 'class-validator'
 import { useState } from './hook-state'
 import { fetchHandler } from '../../utils'
-
-export interface FormState<R> {
+/**基础配置字段**/
+export interface FormState extends Omix {
     initialize: boolean
     disabled: boolean
     visible: boolean
     loading: boolean
-    rules: R
 }
-
-export interface FormOption<T, R, U> extends Partial<FormState<R>> {
+/**自定义表单Hooks入参配置**/
+export interface FormStateOptions<T, K extends keyof T> extends Partial<FormState> {
     mounted?: boolean
-    options?: Omix<U>
     form: Omix<T>
+    rules?: Record<K, FormItemRule | FormItemRule[]>
     callback?: Function
 }
-
 /**自定义表单Hooks**/
-export function useFormService<T extends Omix, R extends FormRules, U extends Omix>(opts: FormOption<T, R, U>) {
+export function useFormService<T extends Omix, K extends keyof T>(opts: FormStateOptions<T, K>) {
     const formRef = ref<FormInst>() as Ref<FormInst & Omix<{ $el: HTMLFormElement }>>
     const form = ref<typeof opts.form>(opts.form)
+    const rules = ref<typeof opts.rules>(opts.rules)
     const { state, setState } = useState({
         initialize: opts.initialize ?? true,
         disabled: opts.disabled ?? false,
         visible: opts.visible ?? false,
-        loading: opts.loading ?? false,
-        rules: opts.rules ?? {},
-        ...(opts.options ?? {})
-    } as FormState<R> & typeof opts.options)
+        loading: opts.loading ?? false
+    } as typeof opts)
 
     onMounted(async () => {
         return await fetchHandler(Boolean(opts.mounted ?? true), async () => {
@@ -73,8 +70,9 @@ export function useFormService<T extends Omix, R extends FormRules, U extends Om
     }
 
     return {
-        form,
         formRef,
+        form,
+        rules,
         state,
         ...toRefs(state),
         setState,

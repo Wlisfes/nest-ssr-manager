@@ -16,8 +16,11 @@ export default defineComponent({
                 email: { required: true, trigger: 'blur', message: '请输入登录账号' },
                 password: { required: true, trigger: 'blur', min: 6, max: 18, message: '请输入6~18位登录密码' },
                 code: { required: true, trigger: 'blur', message: '请输入验证码' }
-            }
+            },
+            COMMON_TYPE_OPTIONS: [{ value: 1, label: '成功' }]
         })
+
+        console.log(state)
 
         async function fetchSubmit() {
             return await fetchValidater().then(async result => {
