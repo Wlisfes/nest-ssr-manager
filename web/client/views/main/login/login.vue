@@ -50,7 +50,7 @@ export default defineComponent({
                         <form-element-input
                             maxlength={64}
                             type="text"
-                            placeholder="请输入登录邮箱"
+                            placeholder="请输入邮箱"
                             v-model:value={form.value.email}
                             input-props={{ autocomplete: 'on' }}
                             prefix={{ name: 'nest-unset-user', size: 22 }}
@@ -60,7 +60,7 @@ export default defineComponent({
                     <n-form-item path="password">
                         <form-element-input
                             maxlength={32}
-                            placeholder="请输入登录密码"
+                            placeholder="请输入密码"
                             type="password"
                             show-password-on="click"
                             input-props={{ autocomplete: 'password' }}
