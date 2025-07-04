@@ -38,13 +38,17 @@ export default defineComponent({
                             <layout-common-deploy></layout-common-deploy>
                             <n-divider vertical class="h-20! m-inline-20!" />
                             <n-element class="flex items-center gap-20 overflow-hidden">
-                                <n-button text focusable={false}>
-                                    登录
-                                </n-button>
+                                <router-link to="/main/login">
+                                    <n-button text focusable={false}>
+                                        登录
+                                    </n-button>
+                                </router-link>
                                 {/* <layout-common-consumer></layout-common-consumer> */}
-                                <n-button focusable={false} round type="primary">
-                                    免费体验
-                                </n-button>
+                                <router-link to="/main/register">
+                                    <n-button focusable={false} round type="primary">
+                                        免费体验
+                                    </n-button>
+                                </router-link>
                             </n-element>
                         </n-element>
                     </n-element>
