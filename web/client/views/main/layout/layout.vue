@@ -43,7 +43,7 @@ export default defineComponent({
     padding-inline-start: 20px;
     padding-inline-end: 210px;
     padding-block-start: 20px;
-    padding-block-end: 140px;
+    padding-block-end: 210px;
     @media (max-width: 900px) {
         padding-inline-end: 20px;
         align-items: center;
