@@ -25,6 +25,7 @@
         "baseUrl": "./",
         "paths": {
             "@server/*": ["./server/*"],
+            "@web-main-server/*": ["apps/web-main-server/src/*"],
             "@web-client-server/*": ["apps/web-client-server/src/*"],
             "@web-client-ssr-server/*": ["apps/web-client-ssr-server/src/*"],
             "@web-remote-ssr-server/*": ["apps/web-remote-ssr-server/src/*"]

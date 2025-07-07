@@ -15,6 +15,15 @@
     "monorepo": true,
     "root": "apps/web-client-ssr-server",
     "projects": {
+        "web-main-server": {
+            "type": "application",
+            "root": "apps/web-main-server",
+            "entryFile": "main",
+            "sourceRoot": "apps/web-main-server/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/web-main-server/tsconfig.app.json"
+            }
+        },
         "web-client-ssr-server": {
             "type": "application",
             "root": "apps/web-client-ssr-server",

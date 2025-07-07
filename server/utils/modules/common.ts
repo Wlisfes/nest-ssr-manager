@@ -3,6 +3,8 @@ import { zh_CN, Faker } from '@faker-js/faker'
 import { isNotEmpty } from 'class-validator'
 import { Request } from 'express'
 import { getClientIp } from 'request-ip'
+import { resolve } from 'path'
+import dotenv from 'dotenv'
 import DayJS from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
@@ -14,6 +16,11 @@ export const moment = DayJS
 
 /**虚拟数据实例**/
 export const faker = new Faker({ locale: zh_CN })
+
+/**根据环境读取env配置**/
+export function fetchGlobalEnv(): Omix {
+    return dotenv.config({ path: resolve(process.cwd(), `./env/.env.${process.env.NODE_ENV}`) }).parsed ?? {}
+}
 
 /**生成纯数字的雪花ID、随机字符串**/
 export function fetchIntNumber(opts: Omix<{ bit?: number }> = {}) {
