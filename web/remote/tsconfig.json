@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "useUnknownInCatchVariables": false,
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "importHelpers": true,
+        "isolatedModules": true,
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "noImplicitAny": false,
+        "lib": ["esnext", "dom"],
+        "types": ["../../env.d.ts", "../webpack/web.d.ts", "vite/client"],
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./*"],
+            "@webpack/*": ["../webpack/*"]
+        }
+    },
+    "include": ["./*.d.ts", "./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue"]
+}
