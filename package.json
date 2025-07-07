@@ -7,6 +7,7 @@
     "license": "UNLICENSED",
     "scripts": {
         "install": "yarn install --ignore-scripts",
+        "------WEB客户端API执行------": "WEB客户端API运行、打包执行指令---------------------------------",
         "dev:web-client-server": "cross-env NODE_ENV=development nest start --watch web-client-server",
         "start:web-client-server": "cross-env NODE_ENV=production node dist/apps/web-client-server/main.js",
         "build:web-client-server": "cross-env NODE_ENV=production nest build web-client-server",
@@ -20,10 +21,14 @@
         "build:web": "npm run build:web-client:client && npm run build:web-client:server",
         "build:web-client:client": "vite --config web/client/vite.config.ts build --ssrManifest --outDir ../../build/web-client/client",
         "build:web-client:server": "vite --config web/client/vite.config.ts build --ssr entry-server --outDir ../../build/web-client/server",
+        "------WEB管理端SSR执行------": "WEB管理端SSR运行、打包执行指令---------------------------------",
+        "dev:web-remote-ssr-server": "cross-env NODE_ENV=development nest start --watch web-remote-ssr-server",
+        "start:web-remote-ssr-server": "cross-env NODE_ENV=production node dist/apps/web-remote-ssr-server/main.js",
+        "build:web-remote-ssr-server": "nest build web-remote-ssr-server",
         "------WEB管理端执行------": "WEB管理端运行、打包执行指令----------------------------------------",
-        "build:web-system": "npm run build:web-system:client && npm run build:web-system:server",
-        "build:web-system:client": "vite --config web/system/vite.config.ts build --ssrManifest --outDir ../build/web-system/client",
-        "build:web-system:server": "vite --config web/system/vite.config.ts build --ssr entry-server --outDir ../build/web-system/server"
+        "build:web-remote": "npm run build:web-remote:client && npm run build:web-remote:server",
+        "build:web-remote:client": "vite --config web/remote/vite.config.ts build --ssrManifest --outDir ../build/web-remote/client",
+        "build:web-remote:server": "vite --config web/remote/vite.config.ts build --ssr entry-server --outDir ../build/web-remote/server"
     },
     "dependencies": {
         "@faker-js/faker": "^8.4.1",
