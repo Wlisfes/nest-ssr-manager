@@ -27,8 +27,8 @@
         "build:web-remote-ssr-server": "nest build web-remote-ssr-server",
         "------WEB管理端执行------": "WEB管理端运行、打包执行指令----------------------------------------",
         "build:web-remote": "npm run build:web-remote:client && npm run build:web-remote:server",
-        "build:web-remote:client": "vite --config web/remote/vite.config.ts build --ssrManifest --outDir ../build/web-remote/client",
-        "build:web-remote:server": "vite --config web/remote/vite.config.ts build --ssr entry-server --outDir ../build/web-remote/server"
+        "build:web-remote:client": "vite --config web/remote/vite.config.ts build --ssrManifest --outDir ../../build/web-remote/client",
+        "build:web-remote:server": "vite --config web/remote/vite.config.ts build --ssr entry-server --outDir ../../build/web-remote/server"
     },
     "dependencies": {
         "@faker-js/faker": "^8.4.1",
