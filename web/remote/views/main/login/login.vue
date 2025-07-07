@@ -94,21 +94,6 @@ export default defineComponent({
                             立即登录
                         </common-element-button>
                     </n-form-item>
-                    <div class="flex flex-1 items-center justify-between">
-                        <div class="flex items-center">
-                            <n-text>还没有账号？</n-text>
-                            <router-link to="/main/register">
-                                <n-button text type="primary" focusable={false}>
-                                    去注册
-                                </n-button>
-                            </router-link>
-                        </div>
-                        <router-link to="/main/register">
-                            <n-button text type="primary" focusable={false}>
-                                忘记密码
-                            </n-button>
-                        </router-link>
-                    </div>
                 </n-form>
             </n-element>
         )

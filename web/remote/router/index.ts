@@ -1,11 +1,10 @@
 import { createRouter as _createRouter, createMemoryHistory, createWebHistory } from 'vue-router'
 import { fetchConcat } from '@webpack/utils'
-import { mainRoutes } from '@/router/modules/main'
-import { clientRoutes } from '@/router/modules/client'
-import { ssrRoutes } from '@/router/modules/ssr'
+import { MainRoutes } from '@/router/modules/main'
+import { ClientRoutes } from '@/router/modules/client'
 
 /**路由配置**/
-export const routes = fetchConcat(mainRoutes, clientRoutes, ssrRoutes)
+export const routes = fetchConcat(MainRoutes, ClientRoutes)
 /**初始化路由实例**/
 export function createRouter(options: Omix<{ ssr: boolean }>) {
     return _createRouter({

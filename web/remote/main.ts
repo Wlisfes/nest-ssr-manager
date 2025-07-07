@@ -5,8 +5,8 @@ import { createSSRApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createRouter } from '@/router'
 import { CoutextServer, CoutextWinston } from '@webpack/plugins'
-import { i18n } from '@/i18n'
 import { setup } from '@css-render/vue3-ssr'
+import { i18n } from '@/i18n'
 import App from '@/App.vue'
 
 export interface AppOptions {
@@ -31,7 +31,7 @@ export function createAppServer(options: AppOptions) {
             const { Logger } = await import('@webpack/plugins')
             await Logger.fetchInitialize(false)
         }
-        return await CoutextWinston(options.ssr, 'web-client')
+        return await CoutextWinston(options.ssr, 'web-remote')
     }
 
     return { app, router, pinia, collect, fetchWinston }

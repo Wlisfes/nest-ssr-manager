@@ -1,7 +1,5 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { useGlobal, useStore } from '@/store'
-import { useI18nContext } from '@/i18n'
 
 export default defineComponent({
     name: 'BaseHome',
@@ -17,13 +15,7 @@ export default defineComponent({
     //     }
     // },
     setup(props) {
-        return () => (
-            <n-element class="flex flex-col flex-1 overflow-hidden">
-                <layout-home-choose></layout-home-choose>
-                <layout-home-issues></layout-home-issues>
-                <layout-home-facts></layout-home-facts>
-            </n-element>
-        )
+        return () => <n-element class="flex flex-col flex-1 overflow-hidden">Home</n-element>
     }
 })
 </script>

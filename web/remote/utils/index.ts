@@ -1,1 +1,1 @@
-export * from './modules/icons'
+export * from '@/utils/modules/icons'

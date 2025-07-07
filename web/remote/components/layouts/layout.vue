@@ -1,13 +1,8 @@
 <script lang="tsx">
 import { defineComponent, Fragment } from 'vue'
-import { useGlobal, useMouse, useStore } from '@/store'
 
 export default defineComponent({
     name: 'Layout',
-    props: {
-        /**容器配置模式**/
-        name: { type: String, required: true }
-    },
     setup(props) {
         return () => (
             <n-layout class="h-full overflow-hidden" content-class="flex flex-col overflow-hidden">
@@ -40,7 +35,6 @@ export default defineComponent({
                     <n-element class="flex flex-col flex-1">
                         <router-view>{{ default: ({ Component, route }) => <Component key={route.fullPath} /> }}</router-view>
                     </n-element>
-                    <layout-common-footer></layout-common-footer>
                 </n-layout-content>
             </n-layout>
         )
