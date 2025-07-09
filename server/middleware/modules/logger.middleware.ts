@@ -10,7 +10,7 @@ export class LoggerMiddleware implements NestMiddleware {
 
     async use(request: Omix<Request>, response: Response, next: NextFunction) {
         const date = Date.now()
-        const context = fetchIntNumber()
+        const context = await fetchIntNumber()
         request.ipv4 = fetchIPClient(request)
         request.headers.datetime = date.toString()
         request.headers.context = context.toString()

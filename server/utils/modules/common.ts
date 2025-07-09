@@ -23,7 +23,7 @@ export function fetchGlobalEnv(): Omix {
 }
 
 /**生成纯数字的雪花ID、随机字符串**/
-export function fetchIntNumber(opts: Omix<{ bit?: number }> = {}) {
+export async function fetchIntNumber(opts: Omix<{ bit?: number }> = {}) {
     if (isNotEmpty(opts.bit) && opts.bit > 0) {
         return Array.from({ length: opts.bit }, x => Math.floor(Math.random() * 9) + 1).join('')
     }
