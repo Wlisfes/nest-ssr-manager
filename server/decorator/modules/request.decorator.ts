@@ -26,10 +26,10 @@ export interface ApiDecoratorOptions {
     throttle: keyof typeof ThrottlerOptions | Parameters<typeof Throttle>['0']
 }
 
-export function ApiRequestDecorator(option: Partial<ApiDecoratorOptions> = {}) {
+export function ApiServiceDecorator(mthodRequest: MethodDecorator, option: Partial<ApiDecoratorOptions> = {}) {
     const consumes = option.consumes ?? ['application/x-www-form-urlencoded', 'application/json']
     const produces = option.produces ?? ['application/json', 'application/xml']
-    const decorators: Array<any> = [ApiOperation(option.operation), ApiConsumes(...consumes), ApiProduces(...produces)]
+    const decorators: Array<any> = [mthodRequest, ApiOperation(option.operation), ApiConsumes(...consumes), ApiProduces(...produces)]
     if (option.skipThrottle) {
         decorators.push(SkipThrottle())
     } else if (isEmpty(option.throttle)) {

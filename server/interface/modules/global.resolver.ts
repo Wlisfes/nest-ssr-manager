@@ -12,5 +12,4 @@ export interface OmixRequest extends Omix<Request> {
     headers: OmixHeaders
     user: Omix
     ipv4: string
-    platform: 'client' | 'manager'
 }

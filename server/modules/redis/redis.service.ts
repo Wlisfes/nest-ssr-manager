@@ -1,13 +1,27 @@
-import { Injectable, Inject } from '@nestjs/common'
+import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common'
 import { Logger, AutoDescriptor } from '@server/modules/logger/logger.service'
 import { CLIENT_REDIS, ClientRedis } from '@server/modules/redis/redis.provider'
 import { OmixRequest, WriteRedisOption, ReadRedisOption, MgetRedisOption, DelRedisOption } from '@server/interface'
-export { fetchKeysCompose } from '@server/utils'
+import { isEmpty, isNotEmpty, isString, isObject } from 'class-validator'
 
 @Injectable()
-export class RidesService extends Logger {
+export class RedisService extends Logger {
     constructor(@Inject(CLIENT_REDIS) public readonly client: ClientRedis) {
         super()
+    }
+
+    /**redis存储键组合方法**/
+    @AutoDescriptor
+    public async fetchCompose(...args: Array<string | Omix>): Promise<string> {
+        const data = args.find(item => isObject(item)) ?? {}
+        const keys = [...args].filter(name => isString(name) && isNotEmpty(name)).join(':')
+        const name = keys.replace(/\{(.*?)\}/g, (match, key) => (isEmpty(data[key]) ? match : data[key]))
+        return new Promise(resolve => {
+            name.replace(/\{(.*?)\}/g, match => {
+                throw new HttpException(`redis key ${match} 参数不可为空`, HttpStatus.BAD_REQUEST)
+            })
+            return resolve(name)
+        })
     }
 
     /**redis存储**/
