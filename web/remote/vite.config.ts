@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig, ConfigEnv, UserConfig } from 'vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import { fetchEnvService } from '../webpack/run'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
 import Analyzer from 'rollup-plugin-analyzer'
@@ -9,17 +10,6 @@ import VueJsx from '@vitejs/plugin-vue-jsx'
 import Vue from '@vitejs/plugin-vue'
 import SvgLoader from 'vite-svg-loader'
 import UnoCSS from 'unocss/vite'
-import dotenv from 'dotenv'
-
-export function fetchEnvService(mode: string) {
-    const config = dotenv.config({ path: resolve(process.cwd(), `./env/.env.${mode}`) }).parsed ?? {}
-    console.log(config)
-    const json: Record<string, any> = {}
-    Object.entries(config).forEach(([key, value]) => {
-        json[`import.meta.env.${key}`] = JSON.stringify(value)
-    })
-    return json
-}
 
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     return {
