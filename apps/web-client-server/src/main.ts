@@ -11,12 +11,12 @@ async function bootstrap() {
     return await setupSwagger(app, {
         title: `ChatBook短信平台-客户端API服务`,
         description: `ChatBook SMS Platform-Client API Service`,
-        port: process.env.NODE_CLIENT_API_PORT
+        port: process.env.NODE_WEB_CLIENT_API_PORT
     }).then(() => {
         console.log(
             `客户端API服务端启动[${process.env.NODE_ENV}]:`,
-            `http://localhost:${process.env.NODE_CLIENT_API_PORT}`,
-            `http://localhost:${process.env.NODE_CLIENT_API_PORT}/api/swagger`
+            `http://localhost:${process.env.NODE_WEB_CLIENT_API_PORT}`,
+            `http://localhost:${process.env.NODE_WEB_CLIENT_API_PORT}/api/swagger`
         )
     })
 }

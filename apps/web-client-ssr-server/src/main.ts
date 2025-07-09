@@ -16,8 +16,8 @@ async function bootstrap() {
         const vite = await createViteServer()
         await app.use(vite.middlewares)
     }
-    return app.listen(process.env.NODE_CLIENT_SSR_PORT).then(() => {
-        console.log(`客户端SSR服务启动[${process.env.NODE_ENV}]:`, `http://localhost:${process.env.NODE_CLIENT_SSR_PORT}`)
+    return app.listen(process.env.NODE_WEB_CLIENT_SSR_PORT).then(() => {
+        console.log(`客户端SSR服务启动[${process.env.NODE_ENV}]:`, `http://localhost:${process.env.NODE_WEB_CLIENT_SSR_PORT}`)
     })
 }
 bootstrap()

@@ -11,7 +11,7 @@ export const mainOptions = [
         name: 'web-client-server',
         swaggerVersion: '1.0.0',
         prefix: '/api/client',
-        baseUrl: `http://localhost:${env.NODE_CLIENT_API_PORT}`,
+        baseUrl: `http://localhost:${env.NODE_WEB_CLIENT_API_PORT}`,
         url: `/api/swagger-json`,
         location: `/api/swagger`
     },
@@ -19,7 +19,7 @@ export const mainOptions = [
         name: 'web-remote-server',
         swaggerVersion: '1.0.0',
         prefix: '/api/remote',
-        baseUrl: `http://localhost:${env.NODE_REMOTE_API_PORT}`,
+        baseUrl: `http://localhost:${env.NODE_WEB_REMOTE_API_PORT}`,
         url: `/api/swagger-json`,
         location: `/api/swagger`
     }
@@ -46,11 +46,11 @@ export async function fetchProxyMiddleware(app: any) {
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
     return await fetchProxyMiddleware(app).then(async () => {
-        return await app.listen(process.env.NODE_MAIN_SSR_PORT).then(() => {
+        return await app.listen(process.env.NODE_WEB_MAIN_SSR_PORT).then(() => {
             console.log(
                 `网关服务启动:`,
-                `http://localhost:${process.env.NODE_MAIN_SSR_PORT}`,
-                `http://localhost:${process.env.NODE_MAIN_SSR_PORT}/doc.html`
+                `http://localhost:${process.env.NODE_WEB_MAIN_SSR_PORT}`,
+                `http://localhost:${process.env.NODE_WEB_MAIN_SSR_PORT}/doc.html`
             )
         })
     })
