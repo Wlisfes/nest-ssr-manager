@@ -16,6 +16,7 @@ export class AuthService extends Logger {
     /**图形验证码**/
     @AutoDescriptor
     public async httpAuthCommonCodexWrite(request: OmixRequest, response: OmixResponse) {
+        // return await this.codexService.httpCommonCodexWrite(request, response)
         // const logger = await this.fetchServiceTransaction(request, { deplayName: this.deplayName })
         // return await this.codexService.httpCommonCodexWrite(request).then(async ({ sid, text, data }) => {
         //     const key = await this.redisService.fetchCompose(`client:codex:common:{sid}`, { sid })
