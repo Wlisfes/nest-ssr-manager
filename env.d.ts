@@ -22,25 +22,25 @@ declare interface EnvOptions {
     /**环境标识**/
     NODE_ENV: 'development' | 'production'
     /**网关服务端口号**/
-    NODE_MAIN_SSR_PORT: number
+    NODE_WEB_MAIN_SSR_PORT: number
     /**管理端SSR服务端口号**/
-    NODE_REMOTE_SSR_PORT: number
+    NODE_WEB_EMOTE_SSR_PORT: number
     /**管理端API服务端口号**/
-    NODE_REMOTE_API_PORT: number
+    NODE_WEB_REMOTE_API_PORT: number
     /**客户端SSR服务端口号**/
-    NODE_CLIENT_SSR_PORT: number
+    NODE_WEB_CLIENT_SSR_PORT: number
     /**客户端API服务端口号**/
-    NODE_CLIENT_API_PORT: number
+    NODE_WEB_CLIENT_API_PORT: number
     /**客户端SSR服务请求地址**/
-    NODE_CLIENT_SSR_BASEURL: string
+    NODE_WEB_CLIENT_SSR_BASEURL: string
     /**网站标题**/
-    NODE_SEO_TITLE: string
+    NODE_WEB_SEO_TITLE: string
     /**网站副标题**/
-    NODE_SEO_SUBTITLE: string
+    NODE_WEB_SEO_SUBTITLE: string
     /**网站搜索关键字**/
-    NODE_SEO_KEYWORDS: string
+    NODE_WEB_SEO_KEYWORDS: string
     /**网站描述**/
-    NODE_SEO_DESCRIPTION: string
+    NODE_WEB_SEO_DESCRIPTION: string
 }
 
 /**扩展import.meta.env字段**/

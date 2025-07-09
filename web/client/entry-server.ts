@@ -18,12 +18,12 @@ export async function render(request: Request, manifest: Record<string, string[]
     const routeMatched = route.value.matched
     /**更新路由meta信息**/
     const meta = route.value.meta
-    meta.keywords = meta.keywords ?? process.env.NODE_SEO_KEYWORDS ?? ''
-    meta.description = meta.description ?? process.env.NODE_SEO_DESCRIPTION ?? ''
-    if (meta.title && process.env.NODE_SEO_TITLE) {
-        meta.title = `${process.env.NODE_SEO_TITLE} - ${meta.title}`
-    } else if (process.env.NODE_SEO_TITLE) {
-        meta.title = process.env.NODE_SEO_TITLE
+    meta.keywords = meta.keywords ?? process.env.NODE_WEB_SEO_KEYWORDS ?? ''
+    meta.description = meta.description ?? process.env.NODE_WEB_SEO_DESCRIPTION ?? ''
+    if (meta.title && process.env.NODE_WEB_SEO_TITLE) {
+        meta.title = `${process.env.NODE_WEB_SEO_TITLE} - ${meta.title}`
+    } else if (process.env.NODE_WEB_SEO_TITLE) {
+        meta.title = process.env.NODE_WEB_SEO_TITLE
     } else {
         meta.title = meta.title ?? ''
     }
@@ -67,8 +67,8 @@ export async function render(request: Request, manifest: Record<string, string[]
         const seo = await mateCallback(config)
         meta.keywords = seo.keywords || meta.keywords
         meta.description = seo.description || meta.description
-        if (seo.title && process.env.NODE_SEO_TITLE) {
-            meta.title = `${process.env.NODE_SEO_TITLE} - ${seo.title}`
+        if (seo.title && process.env.NODE_WEB_SEO_TITLE) {
+            meta.title = `${process.env.NODE_WEB_SEO_TITLE} - ${seo.title}`
         } else if (seo.title) {
             meta.title = seo.title
         }

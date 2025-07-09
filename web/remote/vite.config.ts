@@ -13,6 +13,7 @@ import dotenv from 'dotenv'
 
 export function fetchEnvService(mode: string) {
     const config = dotenv.config({ path: resolve(process.cwd(), `./env/.env.${mode}`) }).parsed ?? {}
+    console.log(config)
     const json: Record<string, any> = {}
     Object.entries(config).forEach(([key, value]) => {
         json[`import.meta.env.${key}`] = JSON.stringify(value)
