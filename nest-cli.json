@@ -42,6 +42,15 @@
                 "tsConfigPath": "apps/web-client-server/tsconfig.app.json"
             }
         },
+        "web-remote-server": {
+            "type": "application",
+            "root": "apps/web-remote-server",
+            "entryFile": "main",
+            "sourceRoot": "apps/web-remote-server/src",
+            "compilerOptions": {
+                "tsConfigPath": "apps/web-remote-server/tsconfig.app.json"
+            }
+        },
         "web-remote-ssr-server": {
             "type": "application",
             "root": "apps/web-remote-ssr-server",
