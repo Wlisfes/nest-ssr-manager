@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig, ConfigEnv, UserConfig } from 'vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
-import { fetchEnvService } from '../webpack/run'
+import { fetchEnvService } from '../webpack/config'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
 import Analyzer from 'rollup-plugin-analyzer'
