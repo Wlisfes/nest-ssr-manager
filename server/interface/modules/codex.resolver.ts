@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
 import { IsNumber } from 'class-validator'
 
-/**写入图形验证码**/
-export class CommonCodexWrite {
+/**创建图形验证码**/
+export class BaseCommonCodexCreate {
     @ApiProperty({ description: '图形验证码宽度', required: false, example: 120 })
     @IsNumber({}, { message: 'width必须是数字' })
     @Type(type => Number)
@@ -18,4 +18,26 @@ export class CommonCodexWrite {
     @IsNumber({}, { message: 'fontSize必须是数字' })
     @Type(type => Number)
     fontSize: number = 40
+}
+
+/**写入图形验证码**/
+export class BaseCommonCodexWrite {
+    /**输出日志方法名**/
+    deplayName?: string
+    /**创建图形验证码配置**/
+    body: BaseCommonCodexCreate
+    /**redis存储key**/
+    keyName: string
+    /**cookie存储字段**/
+    cookieName: string
+}
+
+/**校验redis图形验证码**/
+export class BaseCommonCodexCheck {
+    /**输出日志方法名**/
+    deplayName?: string
+    /**redis存储字段**/
+    keyName: string
+    /**验证码**/
+    code: string
 }
