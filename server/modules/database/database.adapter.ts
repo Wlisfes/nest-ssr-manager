@@ -17,7 +17,7 @@ export function fetchComment(name: string, data: Omix) {
 
 /**时间格式输出**/
 export function CreateDateformat(format: string = `YYYY-MM-DD HH:mm:ss`) {
-    return { to: s => s, from: s => moment(s).format(format) }
+    return { to: s => s, from: s => (isEmpty(s) ? null : moment(s).format(format)) }
 }
 
 /**json自定自定义装饰器**/
