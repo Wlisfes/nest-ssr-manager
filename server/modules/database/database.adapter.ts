@@ -1,7 +1,8 @@
-import { PrimaryColumn, UpdateDateColumn, CreateDateColumn } from 'typeorm'
+import { PrimaryColumn, UpdateDateColumn, CreateDateColumn, Column, ColumnOptions } from 'typeorm'
 import { ApiProperty } from '@nestjs/swagger'
 import { snowflakeId } from 'snowflake-id-maker'
-import { IsNotEmpty } from 'class-validator'
+import { isEmpty, IsNotEmpty } from 'class-validator'
+import { moment } from '@server/utils'
 
 /**枚举文案转换**/
 export function fetchProperty<T>(data: Omix<T>) {
@@ -14,6 +15,35 @@ export function fetchComment(name: string, data: Omix) {
     return `${name}：${text}`
 }
 
+/**时间格式输出**/
+export function CreateDateformat(format: string = `YYYY-MM-DD HH:mm:ss`) {
+    return { to: s => s, from: s => moment(s).format(format) }
+}
+
+/**json自定自定义装饰器**/
+export function CreateJsonColumn(data: Omix<ColumnOptions>) {
+    return Column({
+        ...data,
+        type: 'text',
+        transformer: {
+            from: (s: string) => JSON.parse(s ?? '{}'),
+            to: (s: Omix) => (s ? JSON.stringify(s) : null)
+        }
+    })
+}
+
+/**array自定自定义装饰器**/
+export function CreateArrayColumn(data: Omix<ColumnOptions>) {
+    return Column({
+        ...data,
+        type: 'text',
+        transformer: {
+            from: (s: string) => (isEmpty(s) ? [] : s.toString().split(',')),
+            to: (s: Array<string>) => ((s ?? []).length === 0 ? null : s.join(','))
+        }
+    })
+}
+
 export abstract class DatabaseAdapter {
     @ApiProperty({ description: '主键ID', example: 1000 })
     @IsNotEmpty({ message: '主键ID必填' })
@@ -21,10 +51,10 @@ export abstract class DatabaseAdapter {
     keyId: string = snowflakeId({ worker: process.pid, epoch: 1199145600000 })
 
     @ApiProperty({ description: '创建时间', example: '2023-10-26 16:03:38' })
-    @CreateDateColumn({ name: 'create_time', comment: '创建时间', update: false })
+    @CreateDateColumn({ name: 'create_time', comment: '创建时间', update: false, transformer: CreateDateformat() })
     createTime: Date
 
     @ApiProperty({ description: '更新时间', example: '2023-10-26 16:03:38' })
-    @UpdateDateColumn({ name: 'modify_time', comment: '更新时间' })
+    @UpdateDateColumn({ name: 'modify_time', comment: '更新时间', transformer: CreateDateformat() })
     modifyTime: Date
 }
