@@ -26,8 +26,8 @@
         "paths": {
             "@server/*": ["./server/*"],
             "@web-main-server/*": ["apps/web-main-server/src/*"],
-            "@web-remote-server/*": ["apps/web-remote-server/src/*"],
-            "@web-remote-ssr-server/*": ["apps/web-remote-ssr-server/src/*"],
+            "@web-windows-server/*": ["apps/web-windows-server/src/*"],
+            "@web-windows-ssr-server/*": ["apps/web-windows-ssr-server/src/*"],
             "@web-client-server/*": ["apps/web-client-server/src/*"],
             "@web-client-ssr-server/*": ["apps/web-client-ssr-server/src/*"]
         }

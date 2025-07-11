@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { AppController } from '@web-remote-ssr-server/app.controller'
+import { AppController } from 'apps/web-windows-ssr-server/src/app.controller'
 import { ConfigModule } from '@server/modules/config/config.module'
 
 @Module({
