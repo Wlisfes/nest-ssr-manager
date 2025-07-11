@@ -15,8 +15,8 @@ export class AuthService extends Logger {
         return await this.codexService.httpBaseCommonCodexWrite(request, response, {
             deplayName: this.deplayName,
             body,
-            keyName: `remote:codex:common:{sid}`,
-            cookieName: `x-remote-common-write-sid`
+            keyName: `windows:codex:common:{sid}`,
+            cookieName: `x-windows-common-write-sid`
         })
     }
 }

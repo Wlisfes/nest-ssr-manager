@@ -3,10 +3,10 @@ import { hashSync } from 'bcryptjs'
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, Length, IsEmail, IsEnum, IsMobilePhone } from 'class-validator'
 import { DataBaseAdapter, fetchProperty, fetchComment } from '@server/modules/database/database.adapter'
-import { COMMON_REMOTE_ACCOUNT } from '@server/modules/database/enums'
+import { COMMON_WINDOWS_ACCOUNT } from '@server/modules/database/enums'
 
-@Entity({ name: 'tb_remote_account', comment: '管理端-账号表' })
-export class SchemaRemoteUser extends DataBaseAdapter {
+@Entity({ name: 'tb_windows_account', comment: '管理端-账号表' })
+export class WindowsAccount extends DataBaseAdapter {
     @ApiProperty({ description: 'UID', example: '2149446185344106496' })
     @IsNotEmpty({ message: 'UID必填' })
     @Column({ comment: '唯一UUID', length: 19, nullable: false })
@@ -41,11 +41,11 @@ export class SchemaRemoteUser extends DataBaseAdapter {
     @Column({ comment: '头像', length: 255, nullable: true })
     avatar: string
 
-    @ApiProperty({ description: '账号状态', enum: fetchProperty(COMMON_REMOTE_ACCOUNT.status) })
+    @ApiProperty({ description: '账号状态', enum: fetchProperty(COMMON_WINDOWS_ACCOUNT.status) })
     @IsNotEmpty({ message: '账号状态必填' })
     @Length(0, 32, { message: '账号状态不能超过32个字符' })
-    @IsEnum(Object.keys(COMMON_REMOTE_ACCOUNT.status), { message: '账号状态格式错误' })
-    @Column({ nullable: false, comment: fetchComment('账号状态', COMMON_REMOTE_ACCOUNT.status) })
+    @IsEnum(Object.keys(COMMON_WINDOWS_ACCOUNT.status), { message: '账号状态格式错误' })
+    @Column({ nullable: false, comment: fetchComment('账号状态', COMMON_WINDOWS_ACCOUNT.status) })
     status: string
 
     @ApiProperty({ description: '密码', example: 'MTIzNDU2' })

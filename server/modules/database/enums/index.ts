@@ -1,1 +1,2 @@
-export * from '@server/modules/database/enums/remote/enum.account'
+export * from '@server/modules/database/enums/windows/enum.account'
+export * from '@server/modules/database/enums/windows/enum.resource'

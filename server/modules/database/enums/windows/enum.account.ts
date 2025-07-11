@@ -1,7 +1,5 @@
-/**
- * 管理端账号表
- */
-export const COMMON_REMOTE_ACCOUNT = {
+/**管理端账号表**/
+export const COMMON_WINDOWS_ACCOUNT = {
     /**账号状态**/
     status: {
         enable: {
