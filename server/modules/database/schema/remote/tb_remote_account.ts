@@ -2,11 +2,11 @@ import { Entity, Column } from 'typeorm'
 import { hashSync } from 'bcryptjs'
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, Length, IsEmail, IsEnum, IsMobilePhone } from 'class-validator'
-import { DatabaseAdapter, fetchProperty, fetchComment } from '@server/modules/database/database.adapter'
+import { DataBaseAdapter, fetchProperty, fetchComment } from '@server/modules/database/database.adapter'
 import { COMMON_REMOTE_ACCOUNT } from '@server/modules/database/enums'
 
-@Entity({ name: 'tb_remote_account', comment: '管理端账号表' })
-export class SchemaRemoteUser extends DatabaseAdapter {
+@Entity({ name: 'tb_remote_account', comment: '管理端-账号表' })
+export class SchemaRemoteUser extends DataBaseAdapter {
     @ApiProperty({ description: 'UID', example: '2149446185344106496' })
     @IsNotEmpty({ message: 'UID必填' })
     @Column({ comment: '唯一UUID', length: 19, nullable: false })
