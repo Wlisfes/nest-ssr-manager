@@ -4,7 +4,7 @@ import { IsNotEmpty, Length, IsObject } from 'class-validator'
 import { DataBaseAdapter, WithJsonColumn } from '@server/modules/database/database.adapter'
 
 @Entity({ name: 'tb_remote_kines', comment: '管理端-自定义json配置表' })
-export class SchemaRemoteKines extends DataBaseAdapter {
+export class RemoteKines extends DataBaseAdapter {
     @ApiProperty({ description: '用户UID', example: '2149446185344106496' })
     @IsNotEmpty({ message: '用户UID必填' })
     @Column({ comment: '用户UID', length: 19, nullable: false })
