@@ -5,9 +5,9 @@ import { DataBaseAdapter, WithJsonColumn } from '@server/modules/database/databa
 
 @Entity({ name: 'tb_windows_kines', comment: '管理端-自定义json配置表' })
 export class WindowsKines extends DataBaseAdapter {
-    @ApiProperty({ description: '用户UID', example: '2149446185344106496' })
-    @IsNotEmpty({ message: '用户UID必填' })
-    @Column({ comment: '用户UID', length: 19, nullable: false })
+    @ApiProperty({ description: '账号UID', example: '2149446185344106496' })
+    @IsNotEmpty({ message: '账号UID必填' })
+    @Column({ comment: '账号UID', length: 19, nullable: false })
     uid: string
 
     @ApiProperty({ description: 'json类型' })

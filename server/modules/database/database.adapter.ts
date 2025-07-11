@@ -50,6 +50,7 @@ export function WithArrayColumn(data: Omix<ColumnOptions>) {
     })
 }
 
+/**基础表字段继承**/
 export abstract class DataBaseAdapter {
     @ApiProperty({ description: '主键ID', example: 1000 })
     @IsNotEmpty({ message: '主键ID必填' })
@@ -63,4 +64,17 @@ export abstract class DataBaseAdapter {
     @ApiProperty({ description: '更新时间', example: '2023-10-26 16:03:38' })
     @DateWithColumn(UpdateDateColumn, { name: 'modify_time', comment: '更新时间' })
     modifyTime: Date
+}
+
+/**创建人关联表字段继承**/
+export abstract class DataBaseByAdapter extends DataBaseAdapter {
+    @ApiProperty({ description: '创建账号UID', example: '2149446185344106496' })
+    @IsNotEmpty({ message: '创建账号UID必填' })
+    @Column({ name: 'create_by', comment: '创建账号UID', length: 19, update: false, nullable: false })
+    createBy: string
+
+    @ApiProperty({ description: '更新账号UID', example: '2149446185344106496' })
+    @IsNotEmpty({ message: '更新账号UID必填' })
+    @Column({ name: 'modify_by', comment: '更新账号UID', length: 19, nullable: true })
+    modifyBy: string
 }

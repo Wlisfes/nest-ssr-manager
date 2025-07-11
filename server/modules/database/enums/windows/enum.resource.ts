@@ -33,7 +33,7 @@ export const COMMON_WINDOWS_RESOUREC_PERMISSIONS = {
 }
 
 /**管理端-接口权限表**/
-export const COMMON_WINDOWS_RESOUREC_INTERFACE = {
+export const COMMON_WINDOWS_RESOUREC_APIFOX = {
     /**接口状态**/
     status: {
         enable: {
