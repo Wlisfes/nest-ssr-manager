@@ -31,7 +31,7 @@ export function createAppServer(options: AppOptions) {
             const { Logger } = await import('@webpack/plugins')
             await Logger.fetchInitialize(false)
         }
-        return await CoutextWinston(options.ssr, 'web-remote')
+        return await CoutextWinston(options.ssr, 'web-windows')
     }
 
     return { app, router, pinia, collect, fetchWinston }

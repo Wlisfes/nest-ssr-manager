@@ -26,7 +26,7 @@ declare interface EnvOptions {
     /**管理端SSR服务端口号**/
     NODE_WEB_EMOTE_SSR_PORT: number
     /**管理端API服务端口号**/
-    NODE_WEB_REMOTE_API_PORT: number
+    NODE_WEB_WINDOWS_API_PORT: number
     /**客户端SSR服务端口号**/
     NODE_WEB_CLIENT_SSR_PORT: number
     /**客户端API服务端口号**/

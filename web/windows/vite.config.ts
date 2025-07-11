@@ -13,7 +13,7 @@ import UnoCSS from 'unocss/vite'
 
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     return {
-        root: 'web/remote',
+        root: 'web/windows',
         define: fetchEnvService(mode),
         build: {
             rollupOptions: {

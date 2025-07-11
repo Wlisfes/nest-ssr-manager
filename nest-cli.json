@@ -42,22 +42,22 @@
                 "tsConfigPath": "apps/web-client-server/tsconfig.app.json"
             }
         },
-        "web-remote-server": {
+        "web-windows-server": {
             "type": "application",
-            "root": "apps/web-remote-server",
+            "root": "apps/web-windows-server",
             "entryFile": "main",
-            "sourceRoot": "apps/web-remote-server/src",
+            "sourceRoot": "apps/web-windows-server/src",
             "compilerOptions": {
-                "tsConfigPath": "apps/web-remote-server/tsconfig.app.json"
+                "tsConfigPath": "apps/web-windows-server/tsconfig.app.json"
             }
         },
-        "web-remote-ssr-server": {
+        "web-windows-ssr-server": {
             "type": "application",
-            "root": "apps/web-remote-ssr-server",
+            "root": "apps/web-windows-ssr-server",
             "entryFile": "main",
-            "sourceRoot": "apps/web-remote-ssr-server/src",
+            "sourceRoot": "apps/web-windows-ssr-server/src",
             "compilerOptions": {
-                "tsConfigPath": "apps/web-remote-ssr-server/tsconfig.app.json"
+                "tsConfigPath": "apps/web-windows-ssr-server/tsconfig.app.json"
             }
         }
     }

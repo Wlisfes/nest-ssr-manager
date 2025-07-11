@@ -16,10 +16,10 @@ export const mainOptions = [
         location: `/api/swagger`
     },
     {
-        name: 'web-remote-server',
+        name: 'web-windows-server',
         swaggerVersion: '1.0.0',
-        prefix: '/api/remote',
-        baseUrl: `http://localhost:${env.NODE_WEB_REMOTE_API_PORT}`,
+        prefix: '/api/windows',
+        baseUrl: `http://localhost:${env.NODE_WEB_WINDOWS_API_PORT}`,
         url: `/api/swagger-json`,
         location: `/api/swagger`
     }

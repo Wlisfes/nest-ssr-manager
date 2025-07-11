@@ -8,19 +8,19 @@ export async function createViteServer() {
     if (viteServer) {
         return viteServer
     }
-    return (viteServer = await createServer('web/remote'))
+    return (viteServer = await createServer('web/windows'))
 }
 
 /**Web路由渲染**/
 export async function createRouteServer(request: Request) {
     try {
         if (process.env.NODE_ENV === 'production') {
-            const webServer = new WebServer('web-remote')
+            const webServer = new WebServer('web-windows')
             const options = await webServer.render(request, webServer.manifest)
             return await fetchViteRender(webServer.template, options)
         } else {
             const vite = await createViteServer()
-            const html = readFileSync(resolve(process.cwd(), 'web/remote/index.html'), 'utf-8')
+            const html = readFileSync(resolve(process.cwd(), 'web/windows/index.html'), 'utf-8')
             const element = await vite.transformIndexHtml(request.originalUrl, html)
             return await vite.ssrLoadModule('./entry-server.ts').then(async ({ render }) => {
                 const options = await render(request, {})

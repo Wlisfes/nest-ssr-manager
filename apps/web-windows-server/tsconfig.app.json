@@ -2,7 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "declaration": false,
-        "outDir": "../../dist/apps/web-remote-server"
+        "outDir": "../../dist/apps/web-windows-server"
     },
     "include": ["src/**/*", "../../env.d.ts"],
     "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]

@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Body, Query, Request, Response } from '@nestjs/common'
 import { ApiServiceDecorator } from '@server/decorator'
-import { AuthService } from '@web-remote-server/modules/auth/auth.service'
+import { AuthService } from '@web-windows-server/modules/auth/auth.service'
 import { OmixRequest, OmixResponse, BaseCommonCodexCreate } from '@server/interface'
 import { ApiTags } from '@nestjs/swagger'
 

@@ -20,7 +20,7 @@ export class WebServer {
     public template: string = ''
     public manifest: Record<string, any> = {}
     public render: Function = () => ({})
-    constructor(mode: 'web-remote' | 'web-client') {
+    constructor(mode: 'web-windows' | 'web-client') {
         if (!WebServer.instance) {
             this.template = readFileSync(resolve(process.cwd(), `build/${mode}/client/index.html`), 'utf-8')
             this.manifest = require(`../../../build/${mode}/client/ssr-manifest.json`)
