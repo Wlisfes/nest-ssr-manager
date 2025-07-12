@@ -7,11 +7,12 @@ import { ConfigModule } from '@server/modules/config/config.module'
 import { LoggerModule } from '@server/modules/logger/logger.module'
 import { DatabaseModule } from '@server/modules/database/database.module'
 import { RedisModule } from '@server/modules/redis/redis.module'
+import { JwtModule } from '@server/modules/jwt/jwt.module'
 import { CommonModule } from '@server/modules/common/common.module'
 import { AuthModule } from '@web-windows-server/modules/auth/auth.module'
 
 @Module({
-    imports: [LoggerModule, ConfigModule, DatabaseModule, RedisModule, CommonModule, AuthModule],
+    imports: [LoggerModule, ConfigModule, DatabaseModule, RedisModule, JwtModule, CommonModule, AuthModule],
     providers: [
         { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
         { provide: APP_FILTER, useClass: HttpExceptionFilter }

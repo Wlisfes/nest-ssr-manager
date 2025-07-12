@@ -2,6 +2,7 @@ import { Module, Global } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { DatabaseService } from '@server/modules/database/database.service'
+import * as schema from '@server/modules/database/schema'
 
 @Global()
 @Module({
@@ -20,11 +21,11 @@ import { DatabaseService } from '@server/modules/database/database.service'
                     password: configService.get('NODE_ORM_MYSQL_PASSWORD'),
                     charset: configService.get('NODE_ORM_MYSQL_CHARSET'),
                     synchronize: configService.get('NODE_ENV') === 'development',
-                    entities: Object.values([])
+                    entities: Object.values(schema)
                 }
             }
-        })
-        // TypeOrmModule.forFeature(Object.values(schema))
+        }),
+        TypeOrmModule.forFeature(Object.values(schema))
     ]
 })
 export class DatabaseModule {}
