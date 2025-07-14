@@ -68,8 +68,8 @@ export class WindowsResource extends DataBaseByAdapter {
     status: string
 }
 
-@Entity({ name: 'tb_windows_resource_permissions', comment: '管理端-操作按钮权限表' })
-export class WindowsResourcePermissions extends DataBaseByAdapter {
+@Entity({ name: 'tb_windows_resource_permis', comment: '管理端-操作按钮权限表' })
+export class WindowsResourcePermis extends DataBaseByAdapter {
     @ApiProperty({ description: '归属菜单ID' })
     @IsNotEmpty({ message: '归属菜单ID必填' })
     @Column({ comment: '归属菜单ID', length: 19, nullable: true })

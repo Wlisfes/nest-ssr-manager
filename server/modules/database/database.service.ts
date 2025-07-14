@@ -3,10 +3,11 @@ import { Repository, DataSource, SelectQueryBuilder } from 'typeorm'
 import { isNotEmpty, isEmpty } from 'class-validator'
 import { Logger, AutoDescriptor } from '@server/modules/logger/logger.service'
 import { fetchSelection, fetchCatchWherer } from '@server/utils'
+export { ClientService, WindowsService } from '@server/modules/database/database.schema'
 import * as env from '@server/modules/database/database.interface'
 
 @Injectable()
-export class DatabaseService extends Logger {
+export class DataBaseService extends Logger {
     constructor(private readonly dataSource: DataSource) {
         super()
     }
@@ -101,6 +102,44 @@ export class DatabaseService extends Logger {
         return await model.save(state).then(async node => {
             if (data.logger ?? true) {
                 logger.info({ comment: data.comment, message: `[${model.metadata.name}]:事务等待创建结果`, body: data.body, node })
+            }
+            return node
+        })
+    }
+
+    /**更新数据模型**/
+    @AutoDescriptor
+    public async fetchConnectUpdate<T>(model: Repository<T>, data: env.BaseUpdateOptions<T>) {
+        if ([false, 'false'].includes(data.next ?? true)) {
+            /**next等于false停止执行**/
+            return data
+        }
+        const logger = await this.fetchServiceTransaction(data.request, { deplayName: this.fetchDeplayName(data.deplayName) })
+        return await model.update(data.where, data.body).then(async node => {
+            if (data.logger ?? true) {
+                logger.info({
+                    comment: data.comment,
+                    message: `[${model.metadata.name}]:事务等待更新结果`,
+                    where: data.where,
+                    body: data.body,
+                    node
+                })
+            }
+            return node
+        })
+    }
+
+    /**删除数据模型**/
+    @AutoDescriptor
+    public async fetchConnectDelete<T>(model: Repository<T>, data: env.BaseDeleteOptions<T>) {
+        if ([false, 'false'].includes(data.next ?? true)) {
+            /**next等于false停止执行**/
+            return data
+        }
+        const logger = await this.fetchServiceTransaction(data.request, { deplayName: this.fetchDeplayName(data.deplayName) })
+        return await model.delete(data.where).then(async node => {
+            if (data.logger ?? true) {
+                logger.info({ comment: data.comment, message: `[${model.metadata.name}]:事务等待删除结果`, where: data.where, node })
             }
             return node
         })

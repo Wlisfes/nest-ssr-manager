@@ -34,3 +34,17 @@ export interface BaseCreateOptions<T> extends BaseOptions {
     /**创建数据**/
     body: Parameters<Repository<T>['save']>['0']
 }
+
+/**更新数据模型**/
+export interface BaseUpdateOptions<T> extends BaseOptions {
+    /**更新条件**/
+    where: Parameters<Repository<T>['update']>['0']
+    /**更新数据**/
+    body: Parameters<Repository<T>['update']>['1']
+}
+
+/**删除数据模型**/
+export interface BaseDeleteOptions<T> extends BaseOptions {
+    /**删除条件**/
+    where: Parameters<Repository<T>['delete']>['0']
+}
