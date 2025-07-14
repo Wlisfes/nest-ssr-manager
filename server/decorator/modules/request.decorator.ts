@@ -3,7 +3,7 @@ import { ApiOperation, ApiConsumes, ApiProduces, ApiResponse, ApiBearerAuth } fr
 import { applyDecorators, Type } from '@nestjs/common'
 import { Throttle, SkipThrottle } from '@nestjs/throttler'
 import { isEmpty } from 'class-validator'
-import { AuthClientOptions, AuthRemoteOptions, ThrottlerOptions, ApiClientGuardReflector, ApiRemoteGuardReflector } from '@server/guard'
+import { AuthClientOptions, AuthWindowsOptions, ThrottlerOptions, ApiClientGuardReflector, ApiWindowsGuardReflector } from '@server/guard'
 
 export interface ApiDecoratorOptions {
     /**接口描述**/
@@ -15,7 +15,7 @@ export interface ApiDecoratorOptions {
     /**客户端登录校验**/
     clinet?: AuthClientOptions
     /**管理登录校验**/
-    remote?: AuthRemoteOptions
+    windows?: AuthWindowsOptions
     /**入参类型定义**/
     consumes: string[]
     /**出类型定义**/
@@ -70,9 +70,9 @@ export function ApiServiceDecorator(mthodRequest: MethodDecorator, option: Parti
     /**开启客户端登录校验**/
     if (option.clinet && option.clinet.check) {
         decorators.push(ApiBearerAuth('authorization'), ApiClientGuardReflector(option.clinet))
-    } else if (option.remote && option.remote.check) {
+    } else if (option.windows && option.windows.check) {
         /**开启管理端登录校验**/
-        decorators.push(ApiBearerAuth('authorization'), ApiRemoteGuardReflector(option.clinet))
+        decorators.push(ApiBearerAuth('authorization'), ApiWindowsGuardReflector(option.clinet))
     }
 
     return applyDecorators(...decorators)
