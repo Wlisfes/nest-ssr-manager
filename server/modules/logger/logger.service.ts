@@ -2,6 +2,7 @@ import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 import { Logger as WinstonLogger } from 'winston'
 import { OmixRequest } from '@server/interface'
+import { QueryRunner } from 'typeorm'
 
 /**注入日志配置**/
 export function AutoDescriptor(target: any, propertyName: string, descriptor: Omix<PropertyDescriptor>) {
@@ -66,7 +67,10 @@ export class Logger {
     }
 
     /**异常抛出**/
-    public async fetchCatchCompiler(name: string, err: any) {
+    public async fetchCatchRollback(name: string, err: any, queryRunner?: QueryRunner) {
+        if (queryRunner && queryRunner.rollbackTransaction) {
+            queryRunner.rollbackTransaction()
+        }
         this.logger.error(name, { log: err })
         throw new HttpException(err.message ?? err.response, err.status ?? HttpStatus.INTERNAL_SERVER_ERROR, err.options)
     }

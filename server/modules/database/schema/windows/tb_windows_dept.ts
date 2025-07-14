@@ -23,7 +23,7 @@ export class WindowsDept extends DataBaseByAdapter {
     pid: string
 }
 
-@Entity({ name: 'tb_system_dept_account', comment: '管理端-部门关联账号表' })
+@Entity({ name: 'tb_windows_dept_account', comment: '管理端-部门关联账号表' })
 export class WindowsDeptAccount extends DataBaseAdapter {
     @ApiProperty({ description: '账号UID', example: '2149446185344106496' })
     @IsNotEmpty({ message: '账号UID必填' })

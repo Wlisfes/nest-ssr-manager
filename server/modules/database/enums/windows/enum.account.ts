@@ -2,20 +2,15 @@
 export const COMMON_WINDOWS_ACCOUNT = {
     /**账号状态**/
     status: {
-        enable: {
-            value: 'enable',
-            name: '启用',
+        online: {
+            value: 'online',
+            name: '在职',
             json: { type: 'success' }
         },
-        disable: {
+        offline: {
             value: 'disable',
-            name: '禁用',
+            name: '离职',
             json: { type: 'error' }
-        },
-        suspend: {
-            value: 'suspend',
-            name: '挂起',
-            json: { type: 'warning' }
         }
     }
 }
