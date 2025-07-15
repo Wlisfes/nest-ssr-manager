@@ -107,6 +107,22 @@ export class DataBaseService extends Logger {
         })
     }
 
+    /**批量创建数据模型**/
+    @AutoDescriptor
+    public async fetchConnectInsert<T>(model: Repository<T>, data: env.BaseInsertOptions<T>) {
+        if ([false, 'false'].includes(data.next ?? true)) {
+            /**next等于false停止执行**/
+            return data
+        }
+        const logger = await this.fetchServiceTransaction(data.request, { deplayName: this.fetchDeplayName(data.deplayName) })
+        return await model.save(data.body).then(async node => {
+            if (data.logger ?? true) {
+                logger.info({ comment: data.comment, message: `[${model.metadata.name}]:事务等待批量创建结果`, body: data.body, node })
+            }
+            return node
+        })
+    }
+
     /**更新数据模型**/
     @AutoDescriptor
     public async fetchConnectUpdate<T>(model: Repository<T>, data: env.BaseUpdateOptions<T>) {

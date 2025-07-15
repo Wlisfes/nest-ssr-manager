@@ -1,6 +1,7 @@
 import { Entity, Column } from 'typeorm'
 import { hashSync } from 'bcryptjs'
 import { ApiProperty } from '@nestjs/swagger'
+import { snowflakeId } from 'snowflake-id-maker'
 import { IsNotEmpty, Length, IsEmail, IsEnum, IsMobilePhone } from 'class-validator'
 import { DataBaseAdapter, fetchProperty, fetchComment } from '@server/modules/database/database.adapter'
 import { COMMON_WINDOWS_ACCOUNT } from '@server/modules/database/enums'
@@ -9,8 +10,8 @@ import { COMMON_WINDOWS_ACCOUNT } from '@server/modules/database/enums'
 export class WindowsAccount extends DataBaseAdapter {
     @ApiProperty({ description: 'UID', example: '2149446185344106496' })
     @IsNotEmpty({ message: 'UID必填' })
-    @Column({ comment: '唯一UUID', length: 19, nullable: false })
-    uid: string
+    @Column({ comment: '唯一UUID', update: false, length: 19, nullable: false })
+    uid: string = snowflakeId({ worker: process.pid, epoch: 1199145600000 })
 
     @ApiProperty({ description: '工号', example: '1234' })
     @IsNotEmpty({ message: '工号必填' })

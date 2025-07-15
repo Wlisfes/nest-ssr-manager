@@ -35,6 +35,12 @@ export interface BaseCreateOptions<T> extends BaseOptions {
     body: Parameters<Repository<T>['save']>['0']
 }
 
+/**批量创建数据模型**/
+export interface BaseInsertOptions<T> extends BaseOptions {
+    /**创建数据**/
+    body: Array<Parameters<Repository<T>['save']>['0']>
+}
+
 /**更新数据模型**/
 export interface BaseUpdateOptions<T> extends BaseOptions {
     /**更新条件**/
