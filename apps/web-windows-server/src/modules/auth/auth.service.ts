@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { Logger, AutoDescriptor } from '@server/modules/logger/logger.service'
 import { CodexService } from '@server/modules/common/modules/codex.service'
-import { OmixRequest, OmixResponse, BaseCommonCodexCreate } from '@server/interface'
+import * as env from '@server/interface'
 
 @Injectable()
 export class AuthService extends Logger {
@@ -11,7 +11,7 @@ export class AuthService extends Logger {
 
     /**图形验证码**/
     @AutoDescriptor
-    public async httpAuthCommonCodexWrite(request: OmixRequest, response: OmixResponse, body: BaseCommonCodexCreate) {
+    public async httpAuthCommonCodexWrite(request: env.OmixRequest, response: env.OmixResponse, body: env.CodexCreateOptions) {
         return await this.codexService.httpBaseCommonCodexWrite(request, response, {
             deplayName: this.deplayName,
             body,

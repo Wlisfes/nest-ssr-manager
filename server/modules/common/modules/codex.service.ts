@@ -18,7 +18,7 @@ export class CodexService extends Logger {
      * @param body 图形验证码基础配置
      */
     @AutoDescriptor
-    public async httpBaseCommonCodexWrite(request: env.OmixRequest, response: env.OmixResponse, options: env.BaseCommonCodexWrite) {
+    public async httpBaseCommonCodexWrite(request: env.OmixRequest, response: env.OmixResponse, options: env.CodexWriteOptions) {
         const logger = await this.fetchServiceTransaction(request, { deplayName: this.fetchDeplayName(this.deplayName) })
         return await this.fetchBaseCommonCodexCreate(options.body).then(async ({ sid, text, data }) => {
             const key = await this.redisService.fetchCompose(options.keyName, { sid })
@@ -40,7 +40,7 @@ export class CodexService extends Logger {
      * @param body 基础配置
      */
     @AutoDescriptor
-    public async fetchBaseCommonCodexCreate(body: env.BaseCommonCodexCreate) {
+    public async fetchBaseCommonCodexCreate(body: env.CodexCreateOptions) {
         return await fetchIntNumber().then(async sid => {
             const { text, data } = create({
                 charPreset: `ABCDEFGHJKLMNPQRSTUVWXYZ123456789`,

@@ -3,7 +3,7 @@ import { Type } from 'class-transformer'
 import { IsNumber } from 'class-validator'
 
 /**创建图形验证码**/
-export class BaseCommonCodexCreate {
+export class CodexCreateOptions {
     @ApiProperty({ description: '图形验证码宽度', required: false, example: 120 })
     @IsNumber({}, { message: 'width必须是数字' })
     @Type(type => Number)
@@ -21,11 +21,11 @@ export class BaseCommonCodexCreate {
 }
 
 /**写入图形验证码**/
-export class BaseCommonCodexWrite {
+export class CodexWriteOptions {
     /**输出日志方法名**/
     deplayName?: string
     /**创建图形验证码配置**/
-    body: BaseCommonCodexCreate
+    body: CodexCreateOptions
     /**redis存储key**/
     keyName: string
     /**cookie存储字段**/
