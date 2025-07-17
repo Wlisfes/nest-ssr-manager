@@ -1,11 +1,22 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
+import { isEmpty } from 'class-validator'
+import { compareSync } from 'bcryptjs'
 import { Logger, AutoDescriptor } from '@server/modules/logger/logger.service'
+import { DataBaseService, WindowsService } from '@server/modules/database/database.service'
 import { CodexService } from '@server/modules/common/modules/codex.service'
+import { RedisService } from '@server/modules/redis/redis.service'
 import { OmixRequest, OmixResponse, CodexCreateOptions } from '@server/interface'
+import * as enums from '@server/modules/database/enums'
+import * as windows from '@web-windows-server/interface'
 
 @Injectable()
 export class AuthService extends Logger {
-    constructor(private readonly codexService: CodexService) {
+    constructor(
+        private readonly database: DataBaseService,
+        private readonly windows: WindowsService,
+        private readonly redisService: RedisService,
+        private readonly codexService: CodexService
+    ) {
         super()
     }
 
@@ -18,5 +29,37 @@ export class AuthService extends Logger {
             keyName: `windows:codex:common:{sid}`,
             cookieName: `x-windows-common-write-sid`
         })
+    }
+
+    /**账号登录**/
+    @AutoDescriptor
+    public async httpAuthAccountAuthorize(request: OmixRequest, body: windows.AccountAuthorizeOptions) {
+        try {
+            // await this.codexService.fetchBaseCommonCookiesCodex(request, `x-windows-common-write-sid`).then(async sid => {
+            //     return await this.codexService.fetchBaseCommonCodexCheck(request, {
+            //         keyName: `windows:codex:common:${sid}`,
+            //         deplayName: this.deplayName,
+            //         code: body.code
+            //     })
+            // })
+            return await this.database.fetchConnectBuilder(this.windows.account, async qb => {
+                qb.addSelect('t.password')
+                qb.where(`t.number = :number OR t.phone = :number OR t.email = :number`, { number: body.number })
+                return await qb.getOne().then(async node => {
+                    console.log(node)
+                    if (isEmpty(node)) {
+                        throw new HttpException(`账号不存在`, HttpStatus.BAD_REQUEST)
+                    } else if (!compareSync(body.password, node.password)) {
+                        throw new HttpException(`账号密码不正确`, HttpStatus.BAD_REQUEST)
+                    } else if (node.status === enums.COMMON_WINDOWS_ACCOUNT.status.offline.value) {
+                        throw new HttpException(`员工账号已离职`, HttpStatus.FORBIDDEN)
+                    }
+                    // return await this.jwtService.fetchJwtTokenSecret(utils.pick(node, ['uid', 'number', 'name', 'status']))
+                    return await this.fetchResolver(node)
+                })
+            })
+        } catch (err) {
+            return await this.fetchCatchRollback(this.deplayName, err)
+        }
     }
 }

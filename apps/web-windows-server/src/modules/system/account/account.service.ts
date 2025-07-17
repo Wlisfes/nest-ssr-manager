@@ -12,7 +12,7 @@ import * as windows from '@web-windows-server/interface'
 export class AccountService extends Logger {
     constructor(
         private readonly database: DataBaseService,
-        private readonly windowsService: WindowsService
+        private readonly windows: WindowsService
     ) {
         super()
     }
@@ -22,13 +22,13 @@ export class AccountService extends Logger {
     public async httpBaseSystemCreateAccount(request: OmixRequest, body: windows.CreateAccountOptions) {
         const ctx = await this.database.fetchConnectTransaction()
         try {
-            await this.database.fetchConnectBuilder(this.windowsService.account, async qb => {
+            await this.database.fetchConnectBuilder(this.windows.account, async qb => {
                 qb.where(`t.number = :number OR t.phone = :phone`, { number: body.number, phone: body.phone })
                 return await qb.getOne().then(async node => {
                     if (isNotEmpty(node) && node.number == body.number) {
-                        throw new HttpException(`number:${body.name} 已存在`, HttpStatus.BAD_REQUEST)
+                        throw new HttpException(`number:${body.number} 已存在`, HttpStatus.BAD_REQUEST)
                     } else if (isNotEmpty(node) && node.phone == body.phone) {
-                        throw new HttpException(`phone:${body.name} 已存在`, HttpStatus.BAD_REQUEST)
+                        throw new HttpException(`phone:${body.phone} 已存在`, HttpStatus.BAD_REQUEST)
                     }
                     return node
                 })
