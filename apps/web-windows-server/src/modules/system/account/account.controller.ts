@@ -1,12 +1,10 @@
-import { ApiTags } from '@nestjs/swagger'
-import { Controller, Post, Body, Request } from '@nestjs/common'
+import { Post, Body, Request } from '@nestjs/common'
 import { AccountService } from '@web-windows-server/modules/system/account/account.service'
-import { ApiServiceDecorator } from '@server/decorator'
+import { ApifoxController, ApiServiceDecorator } from '@server/decorator'
 import { OmixRequest } from '@server/interface'
 import * as windows from '@web-windows-server/interface'
 
-@ApiTags('账号模块')
-@Controller('system/account')
+@ApifoxController('账号模块', 'system/account')
 export class AccountController {
     constructor(private readonly accountService: AccountService) {}
 

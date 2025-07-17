@@ -1,11 +1,10 @@
-import { Controller, Post, Get, Body, Query, Request, Response } from '@nestjs/common'
-import { ApiServiceDecorator } from '@server/decorator'
+import { Post, Get, Body, Query, Request, Response } from '@nestjs/common'
+import { ApifoxController, ApiServiceDecorator } from '@server/decorator'
 import { AuthService } from '@web-windows-server/modules/auth/auth.service'
-import { ApiTags } from '@nestjs/swagger'
-import * as env from '@server/interface'
+import { OmixRequest, OmixResponse, CodexCreateOptions } from '@server/interface'
+import * as windows from '@web-windows-server/interface'
 
-@ApiTags('授权模块')
-@Controller('auth')
+@ApifoxController('授权模块', 'auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
@@ -13,19 +12,19 @@ export class AuthController {
         operation: { summary: '图形验证码' },
         response: { status: 200, description: 'OK' }
     })
-    public async httpAuthCommonCodexWrite(
-        @Request() request: env.OmixRequest,
-        @Response() response: env.OmixResponse,
-        @Query() query: env.CodexCreateOptions
+    public async httpAuthCodexWrite(
+        @Request() request: OmixRequest,
+        @Response() response: OmixResponse,
+        @Query() query: CodexCreateOptions
     ) {
-        return await this.authService.httpAuthCommonCodexWrite(request, response, query)
+        return await this.authService.httpAuthCodexWrite(request, response, query)
     }
 
-    @ApiServiceDecorator(Get('/login'), {
-        operation: { summary: '图形验证码' },
+    @ApiServiceDecorator(Post('/login'), {
+        operation: { summary: '账号登录' },
         response: { status: 200, description: 'OK' }
     })
-    public async httpAuthCommonLogin(@Request() request: env.OmixRequest, @Query() query) {
-        // return await this.authService.httpAuthCommonCodexWrite(request,  query)
+    public async httpAuthAccount(@Request() request: OmixRequest, @Body() body: windows.AuthAccountOptions) {
+        // return await this.authService.httpAuthCodexWrite(request,  query)
     }
 }

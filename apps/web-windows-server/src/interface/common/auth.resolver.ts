@@ -3,7 +3,7 @@ import { OmixColumn, OmixPayload } from '@server/interface'
 import { WindowsAccount } from '@server/modules/database/schema'
 
 /**新增用户账号**/
-export class AuthCommonTokenAuthorize extends IntersectionType(
-    PickType(WindowsAccount, ['name', 'number', 'phone', 'password', 'status']),
-    PickType(WindowsAccount, ['avatar', 'email'])
+export class AuthAccountOptions extends IntersectionType(
+    PickType(WindowsAccount, ['number', 'password']),
+    PickType(OmixPayload, ['code'])
 ) {}
