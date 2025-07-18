@@ -33,7 +33,7 @@ export class AuthService extends Logger {
 
     /**账号登录**/
     @AutoDescriptor
-    public async httpAuthAccountAuthorize(request: OmixRequest, body: windows.AccountAuthorizeOptions) {
+    public async httpAuthAccountToken(request: OmixRequest, body: windows.AccountTokenOptions) {
         try {
             // await this.codexService.fetchBaseCommonCookiesCodex(request, `x-windows-common-write-sid`).then(async sid => {
             //     return await this.codexService.fetchBaseCommonCodexCheck(request, {

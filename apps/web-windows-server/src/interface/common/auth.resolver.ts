@@ -3,7 +3,7 @@ import { OmixColumn, OmixPayload } from '@server/interface'
 import { WindowsAccount } from '@server/modules/database/schema'
 
 /**账号登录**/
-export class AccountAuthorizeOptions extends IntersectionType(
+export class AccountTokenOptions extends IntersectionType(
     PickType(WindowsAccount, ['number', 'password']),
     PickType(OmixPayload, ['code'])
 ) {}

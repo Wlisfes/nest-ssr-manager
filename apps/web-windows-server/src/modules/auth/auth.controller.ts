@@ -20,7 +20,7 @@ export class AuthController {
         operation: { summary: '账号登录' },
         response: { status: 200, description: 'OK' }
     })
-    public async httpAuthAccountAuthorize(@Request() request: OmixRequest, @Body() body: windows.AccountAuthorizeOptions) {
-        return await this.authService.httpAuthAccountAuthorize(request, body)
+    public async httpAuthAccountToken(@Request() request: OmixRequest, @Body() body: windows.AccountTokenOptions) {
+        return await this.authService.httpAuthAccountToken(request, body)
     }
 }
