@@ -6,15 +6,16 @@ export const ClientRoutes: Array<RouteRecordRaw> = [
         path: '/',
         name: Layout.name,
         component: Layout,
+        meta: { AUTH: 'AUTH' },
         children: [
             {
                 path: '/',
-                meta: { AUTH: 'NONE' },
+                meta: { AUTH: 'AUTH' },
                 component: () => import('@/views/home/home.vue')
             },
             {
                 path: '/:pathMatch(.*)*',
-                meta: { AUTH: 'NONE' },
+                meta: { AUTH: 'AUTH' },
                 component: () => import('@/views/error/404.vue')
             }
         ]
