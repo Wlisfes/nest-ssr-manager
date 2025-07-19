@@ -27,7 +27,7 @@ export class AuthWindowsGuard implements CanActivate {
     /**token解析**/
     public async fetchGuardHandler(request: Omix<OmixRequest>, token: string, options: AuthWindowsOptions) {
         try {
-            request.user = await this.jwtService.fetchJwtParser('')
+            request.user = await this.jwtService.fetchJwtParser(token)
         } catch (err) {
             if (!options.next) {
                 throw new HttpException(err.message ?? '身份验证失败', err.status ?? HttpStatus.UNAUTHORIZED)
@@ -41,6 +41,7 @@ export class AuthWindowsGuard implements CanActivate {
         const request = context.switchToHttp().getRequest<OmixRequest>()
         const options = await this.fetchCtxOptions(context)
         const token = (request.headers.authorization ?? '').replace(/^Bearer\s+/i, '')
+        await new Promise(resolve => setTimeout(resolve, 100))
         return await this.fetchGuardHandler(request, token, options).then(() => {
             return true
         })

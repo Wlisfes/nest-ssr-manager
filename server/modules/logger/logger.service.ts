@@ -1,8 +1,7 @@
-import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common'
+import { Injectable, Inject } from '@nestjs/common'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 import { Logger as WinstonLogger } from 'winston'
 import { OmixRequest } from '@server/interface'
-import { QueryRunner } from 'typeorm'
 
 /**注入日志配置**/
 export function AutoDescriptor(target: any, propertyName: string, descriptor: Omix<PropertyDescriptor>) {
@@ -11,6 +10,10 @@ export function AutoDescriptor(target: any, propertyName: string, descriptor: Om
     const originalMethod = descriptor.value
     descriptor.value = function (...args: any[]) {
         this.deplayName = [className, methodName].join(':')
+        this.logger = new WinstonService(this.logger, args[0], {
+            date: args[0]?.headers?.datetime,
+            deplayName: this.deplayName
+        })
         return originalMethod.apply(this, args)
     }
 }
@@ -20,11 +23,12 @@ export class WinstonService {
     private logger: WinstonLogger
     private request: OmixRequest
     private options: Omix
-    private date: Date = new Date()
+    private date: Date
     constructor(logger: WinstonLogger, request: OmixRequest, options: Omix) {
         this.logger = logger
         this.request = request
         this.options = options
+        this.date = new Date(options.date ? Number(options.date) : undefined)
     }
     /**日志组合输出**/
     private output(log: Omix) {
@@ -64,14 +68,5 @@ export class Logger {
     /**返回包装**/
     public async fetchResolver<T>(data: Partial<OmixResult<T>>) {
         return data
-    }
-
-    /**异常抛出**/
-    public async fetchCatchRollback(name: string, err: any, queryRunner?: QueryRunner) {
-        if (queryRunner && queryRunner.rollbackTransaction) {
-            queryRunner.rollbackTransaction()
-        }
-        this.logger.error(name, { log: err })
-        throw new HttpException(err.message ?? err.response, err.status ?? HttpStatus.INTERNAL_SERVER_ERROR, err.options)
     }
 }

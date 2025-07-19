@@ -26,12 +26,17 @@ export class AuthService extends Logger {
     /**图形验证码**/
     @AutoDescriptor
     public async httpAuthCodexWrite(request: OmixRequest, response: OmixResponse, body: CodexCreateOptions) {
-        return await this.codexService.httpBaseCommonCodexWrite(request, response, {
-            deplayName: this.deplayName,
-            body,
-            keyName: `windows:codex:common:{sid}`,
-            cookieName: `x-windows-common-write-sid`
-        })
+        try {
+            return await this.codexService.httpBaseCommonCodexWrite(request, response, {
+                deplayName: this.deplayName,
+                body,
+                keyName: `windows:codex:common:{sid}`,
+                cookieName: `x-windows-common-write-sid`
+            })
+        } catch (err) {
+            this.logger.error(err)
+            throw new HttpException(err.message, err.status, err.options)
+        }
     }
 
     /**账号登录**/
@@ -49,7 +54,6 @@ export class AuthService extends Logger {
                 qb.addSelect('t.password')
                 qb.where(`t.number = :number OR t.phone = :number OR t.email = :number`, { number: body.number })
                 return await qb.getOne().then(async node => {
-                    console.log(node)
                     if (isEmpty(node)) {
                         throw new HttpException(`账号不存在`, HttpStatus.BAD_REQUEST)
                     } else if (!compareSync(body.password, node.password)) {
@@ -61,7 +65,8 @@ export class AuthService extends Logger {
                 })
             })
         } catch (err) {
-            return await this.fetchCatchRollback(this.deplayName, err)
+            this.logger.error(err)
+            throw new HttpException(err.message, err.status, err.options)
         }
     }
 
@@ -69,6 +74,10 @@ export class AuthService extends Logger {
     @AutoDescriptor
     public async httpAuthAccountTokenContinue(request: OmixRequest) {
         try {
-        } catch (err) {}
+            return await this.jwtService.fetchJwtSecret(pick(request.user, ['uid', 'number', 'name', 'status']))
+        } catch (err) {
+            this.logger.error(err)
+            throw new HttpException(err.message, err.status, err.options)
+        }
     }
 }

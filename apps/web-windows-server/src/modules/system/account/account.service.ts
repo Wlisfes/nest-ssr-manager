@@ -40,7 +40,8 @@ export class AccountService extends Logger {
             })
             return await this.fetchResolver({ message: '新增成功' })
         } catch (err) {
-            return await this.fetchCatchRollback(this.deplayName, err, ctx)
+            this.logger.error(err)
+            throw new HttpException(err.message, err.status, err.options)
         } finally {
             await ctx.release()
         }
