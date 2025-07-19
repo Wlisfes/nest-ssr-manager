@@ -17,7 +17,7 @@ export class JwtService extends Logger {
     @AutoDescriptor
     public async fetchJwtParser<T>(token: string, options: Partial<JwtParserOptions> = {}): Promise<T> {
         try {
-            return (await this.jwt.verifyAsync(token, { secret: this.configService.get('JWT_SECRET') })) as T
+            return (await this.jwt.verifyAsync(token, { secret: this.configService.get('NODE_JWT_SECRET') })) as T
         } catch (e) {
             throw new HttpException(options.message ?? '身份验证失败', options.code ?? HttpStatus.UNAUTHORIZED)
         }
@@ -27,18 +27,16 @@ export class JwtService extends Logger {
     @AutoDescriptor
     public async fetchJwtSecret<T>(node: Omix<T>, options: Partial<JwtSecretOptions> = {}) {
         try {
-            const jwtSecret = this.configService.get('JWT_SECRET')
-            const expires = Number(options.expires ?? 3600 * 24 * 30)
+            const jwtSecret = this.configService.get('NODE_JWT_SECRET')
+            const expires = Number(options.expires ?? this.configService.get('NODE_JWT_EXPIRES') ?? 7200)
             const datetime = new Date().getTime()
-            const token = await this.jwt.signAsync(Object.assign(node, { datetime, auth: 'token' }), {
-                expiresIn: expires,
-                secret: jwtSecret
-            })
-            const secret = await this.jwt.signAsync(Object.assign(node, { datetime, auth: 'secret' }), {
-                expiresIn: expires * 2,
-                secret: jwtSecret
-            })
-            return { expires, token, secret }
+            return {
+                expires,
+                token: await this.jwt.signAsync(Object.assign(node, { datetime, auth: 'token' }), {
+                    expiresIn: expires,
+                    secret: jwtSecret
+                })
+            }
         } catch (e) {
             throw new HttpException(options.message ?? '身份验证失败', options.code ?? HttpStatus.UNAUTHORIZED)
         }

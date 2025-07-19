@@ -13,9 +13,9 @@ export interface ApiDecoratorOptions {
     /**分页列表类型**/
     customize: { status: number; description: string; type: Type<unknown> }
     /**客户端登录校验**/
-    clinet?: AuthClientOptions
+    clinet?: boolean | AuthClientOptions
     /**管理登录校验**/
-    windows?: AuthWindowsOptions
+    windows?: boolean | AuthWindowsOptions
     /**入参类型定义**/
     consumes: string[]
     /**出类型定义**/
@@ -26,26 +26,26 @@ export interface ApiDecoratorOptions {
     throttle: keyof typeof ThrottlerOptions | Parameters<typeof Throttle>['0']
 }
 
-export function ApiServiceDecorator(mthodRequest: MethodDecorator, option: Partial<ApiDecoratorOptions> = {}) {
-    const consumes = option.consumes ?? ['application/json']
-    const produces = option.produces ?? ['application/json', 'application/xml']
-    const decorators: Array<any> = [mthodRequest, ApiOperation(option.operation), ApiConsumes(...consumes), ApiProduces(...produces)]
-    if (option.skipThrottle) {
+export function ApiServiceDecorator(mthodRequest: MethodDecorator, options: Partial<ApiDecoratorOptions> = {}) {
+    const consumes = options.consumes ?? ['application/json']
+    const produces = options.produces ?? ['application/json', 'application/xml']
+    const decorators: Array<any> = [mthodRequest, ApiOperation(options.operation), ApiConsumes(...consumes), ApiProduces(...produces)]
+    if (options.skipThrottle) {
         decorators.push(SkipThrottle())
-    } else if (isEmpty(option.throttle)) {
+    } else if (isEmpty(options.throttle)) {
         decorators.push(Throttle({ default: ThrottlerOptions.default }))
-    } else if (option.throttle && typeof option.throttle === 'string') {
-        decorators.push(Throttle({ [option.throttle]: ThrottlerOptions[option.throttle] }))
-    } else if (typeof option.throttle === 'object') {
-        decorators.push(Throttle(option.throttle))
+    } else if (options.throttle && typeof options.throttle === 'string') {
+        decorators.push(Throttle({ [options.throttle]: ThrottlerOptions[options.throttle] }))
+    } else if (typeof options.throttle === 'object') {
+        decorators.push(Throttle(options.throttle))
     }
 
-    if (option.customize) {
+    if (options.customize) {
         decorators.push(
-            ApiExtraModels(option.customize.type),
+            ApiExtraModels(options.customize.type),
             ApiResponse({
-                status: option.customize.status,
-                description: option.customize.description,
+                status: options.customize.status,
+                description: options.customize.description,
                 schema: {
                     allOf: [
                         {
@@ -55,7 +55,7 @@ export function ApiServiceDecorator(mthodRequest: MethodDecorator, option: Parti
                                 total: { type: 'number', default: 0 },
                                 list: {
                                     type: 'array',
-                                    items: { $ref: getSchemaPath(option.customize.type) }
+                                    items: { $ref: getSchemaPath(options.customize.type) }
                                 }
                             }
                         }
@@ -64,15 +64,15 @@ export function ApiServiceDecorator(mthodRequest: MethodDecorator, option: Parti
             })
         )
     } else {
-        decorators.push(ApiResponse(option.response))
+        decorators.push(ApiResponse(options.response))
     }
 
     /**开启客户端登录校验**/
-    if (option.clinet && option.clinet.check) {
-        decorators.push(ApiBearerAuth('authorization'), ApiClientGuardReflector(option.clinet))
-    } else if (option.windows && option.windows.check) {
+    if (options.clinet) {
+        decorators.push(ApiBearerAuth('authorization'), ApiClientGuardReflector(options.clinet))
+    } else if (options.windows) {
         /**开启管理端登录校验**/
-        decorators.push(ApiBearerAuth('authorization'), ApiWindowsGuardReflector(option.clinet))
+        decorators.push(ApiBearerAuth('authorization'), ApiWindowsGuardReflector(options.windows))
     }
 
     return applyDecorators(...decorators)

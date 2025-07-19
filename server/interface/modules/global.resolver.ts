@@ -10,6 +10,6 @@ export interface OmixResponse extends Omix<Response> {}
 /**Request类型**/
 export interface OmixRequest extends Omix<Request> {
     headers: OmixHeaders
-    user: Omix
     ipv4: string
+    user: Omix
 }

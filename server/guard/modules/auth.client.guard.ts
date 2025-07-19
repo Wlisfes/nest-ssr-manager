@@ -2,9 +2,7 @@ import { CanActivate, SetMetadata, ExecutionContext, Injectable, HttpException, 
 import { Reflector } from '@nestjs/core'
 
 export interface AuthClientOptions {
-    /**开启token验证**/
-    check: boolean
-    /**token验证未通过是否继续执行**/
+    /**验证失败是否继续执行**/
     next?: boolean
 }
 
@@ -17,6 +15,6 @@ export class AuthClientGuard implements CanActivate {
 }
 
 /**登录守卫、使用ApiClientGuardReflector守卫的接口会验证登录**/
-export const ApiClientGuardReflector = (options: AuthClientOptions) => {
+export const ApiClientGuardReflector = (options: boolean | AuthClientOptions) => {
     return SetMetadata(`APP_AUTH_CLIENT_CONTEXT`, options)
 }

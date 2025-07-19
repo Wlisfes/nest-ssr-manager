@@ -1,8 +1,9 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
-import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core'
+import { APP_INTERCEPTOR, APP_FILTER, APP_GUARD } from '@nestjs/core'
 import { UserAgentMiddleware, LoggerMiddleware } from '@server/middleware'
 import { TransformInterceptor } from '@server/interceptor'
 import { HttpExceptionFilter } from '@server/filters'
+import { AuthWindowsGuard } from '@server/guard'
 import { ConfigModule } from '@server/modules/config/config.module'
 import { LoggerModule } from '@server/modules/logger/logger.module'
 import { DatabaseModule } from '@server/modules/database/database.module'
@@ -15,6 +16,7 @@ import { SystemModule } from '@web-windows-server/modules/system/system.module'
 @Module({
     imports: [LoggerModule, ConfigModule, DatabaseModule, RedisModule, JwtModule, CommonModule, AuthModule, SystemModule],
     providers: [
+        { provide: APP_GUARD, useClass: AuthWindowsGuard },
         { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
         { provide: APP_FILTER, useClass: HttpExceptionFilter }
     ]
